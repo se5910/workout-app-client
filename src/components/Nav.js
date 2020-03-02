@@ -10,57 +10,22 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Drawer from "@material-ui/core/Drawer";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-
-const drawerWidth = 240;
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
     flexGrow: 1
   },
   menuButton: {
     marginRight: theme.spacing(2)
   },
   appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
     backgroundColor: "black"
   },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  hide: {
-    display: "none"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    contentShift: {}
+  list: {
+    width: 250
   }
 }));
 
@@ -69,9 +34,16 @@ function Navbar(props) {
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [state, setState] = React.useState({
+    left: false
+  });
 
-  const handleChange = event => {
-    setAuth(event.target.checked);
+  const toggleDrawer = open => e => {
+    if (e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
+      return;
+    }
+
+    setState({ ...state, left: open });
   };
 
   const handleMenu = event => {
@@ -81,6 +53,30 @@ function Navbar(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const sideList = () => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        <ListItem button>
+          <ListItemText>Home</ListItemText>
+        </ListItem>
+        <ListItem button>
+          <ListItemText>Login</ListItemText>
+        </ListItem>
+        <ListItem button>
+          <ListItemText>Signup</ListItemText>
+        </ListItem>
+        <ListItem button>
+          <ListItemText>Dashboard</ListItemText>
+        </ListItem>
+      </List>
+    </div>
+  );
 
   return (
     <div className={classes.root}>
@@ -94,7 +90,7 @@ function Navbar(props) {
               aria-label="menu"
               aria-haspopup="true"
               aria-controls="menu-appbar"
-              onclick={handleMenu}
+              onClick={toggleDrawer(true)}
             >
               <MenuIcon />
             </IconButton>
@@ -129,14 +125,10 @@ function Navbar(props) {
           )}
         </ToolBar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{ paper: classes.drawerPaper }}
-      ></Drawer>
-
+      <Drawer open={state.left} onClose={toggleDrawer(false)}>
+        {sideList}
+      </Drawer>
+      <sideList></sideList>
       <nav>
         <ul>
           <li>
