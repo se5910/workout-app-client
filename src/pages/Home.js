@@ -4,7 +4,9 @@ class Home extends React.Component {
   state = { res: "home" };
 
   componentDidMount() {
-    fetch("/rest")
+    fetch("/rest", {
+      headers: { authorization: "Basic " + window.btoa("john:dummy") }
+    })
       .then(response => {
         return response.json();
       })
