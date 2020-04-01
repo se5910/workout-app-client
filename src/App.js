@@ -1,17 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/Nav';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./components/Nav";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import SignUp from './pages/SignUp';
-import './App.css';
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import SignUp from "./pages/SignUp";
+import "./App.css";
 
 function App() {
   return (
     <Router>
-      <div>
-        <Navbar />
+      <Layout>
         <Switch>
           <Route path="/login">
             <Login />
@@ -26,10 +26,8 @@ function App() {
             <Home />
           </Route>
         </Switch>
-      </div>
+      </Layout>
     </Router>
-
-
   );
 }
 
