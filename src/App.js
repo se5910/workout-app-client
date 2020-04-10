@@ -15,10 +15,18 @@ function App() {
     <Provider store={store}>
       <Router>
         <Layout>
-          <Route exact path="/login" component={Login} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/signup" component={SignUp} />
+          {
+            // Public
+          }
           <Route exact path="/" component={Home} />
+          <Route path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+
+          {
+            // Protected
+          }
+          <Route path="/dashboard" component={Dashboard} />
+
         </Layout>
       </Router>
     </Provider>
