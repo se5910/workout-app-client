@@ -15,20 +15,10 @@ function App() {
     <Provider store={store}>
       <Router>
         <Layout>
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Route exact path="/login" component={Login} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/signup" component={SignUp} />
+          <Route exact path="/" component={Home} />
         </Layout>
       </Router>
     </Provider>
