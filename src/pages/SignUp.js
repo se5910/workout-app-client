@@ -3,7 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -34,7 +33,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const SignUp = ({ errors, createNewUser, history }) => {
+const SignUp = ({ errors, createNewUser, history, auth }) => {
+  // Don't display if logged in
+  if (auth.validToken) {
+    history.push("/dashboard")
+  }
+
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -140,7 +144,8 @@ const SignUp = ({ errors, createNewUser, history }) => {
 }
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  auth: state.auth
 })
 
 export default connect(mapStateToProps, { createNewUser })(SignUp)
