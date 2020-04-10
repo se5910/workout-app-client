@@ -4,9 +4,9 @@ The front end for a work out app being developed for a Software Engineering clas
 
 ## Built With
 
-* [React](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Redux](https://maven.apache.org/) - State management
-* [Material-Ui](https://rometools.github.io/rome/) - Style framwork
+* [React](https://reactjs.org/) - The web framework used
+* [Redux](https://redux.js.org/) - State management
+* [Material-Ui](https://material-ui.com/) - Style framework
 
 ## Authors
 
