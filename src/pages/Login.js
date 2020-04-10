@@ -1,30 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { connect } from 'react-redux'
+import { login } from "../actions/authActions"
+import PropTypes from "prop-types"
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -46,8 +35,33 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ }) => {
+const Login = ({ login, errors, auth, history }) => {
+  // Don't display if logged in
+  if (auth.validToken) {
+    history.push("/dashboard")
+  }
+
   const classes = useStyles();
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: ""
+  })
+
+  const {
+    username,
+    password
+  } = formData
+
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    login(formData)
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,32 +73,32 @@ const Login = ({ }) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={e => onSubmit(e)}>
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
-            id="email"
+            id="username"
             label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
+            name="username"
+            error={errors.username ? true : false}
+            helperText={errors.username}
+            value={username}
+            onChange={e => onChange(e)}
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            error={errors.password ? true : false}
+            helperText={errors.password}
+            value={password}
+            onChange={e => onChange(e)}
+
           />
           <Button
             type="submit"
@@ -113,4 +127,15 @@ const Login = ({ }) => {
   );
 }
 
-export default Login
+Login.propTypes = ({
+  errors: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+})
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, { login })(Login)

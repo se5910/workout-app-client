@@ -10,13 +10,12 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
+import Button from "@material-ui/core/Button"
 import Container from "@material-ui/core/Container";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 
 function Copyright() {
   return (
@@ -154,11 +153,8 @@ export default function Dashboard(props) {
           >
             Hype4fitness
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Button color="inherit" component={Link} to="/login">Login</Button>
+          <Button color="inherit" component={Link} to="/signup">Sign Up</Button>
         </Toolbar>
       </AppBar>
       <Drawer
