@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 import jwtDecode from 'jwt-decode'
+import setJWTToken from "./util/setJWTToken"
 const initialState = {}
 const middleware = [thunk]
 
@@ -15,6 +16,7 @@ const checkTokenExpirationMiddleware = store => next => action => {
   if (jwtDecode(token).exp < Date.now() / 1000) {
     next(action);
     localStorage.clear();
+    setJWTToken(false)
   }
   next(action);
 };
