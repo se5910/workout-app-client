@@ -4,22 +4,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import Box from "@material-ui/core/Box";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button"
 import Container from "@material-ui/core/Container";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
-import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 import PropTypes from "prop-types"
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
+import NavBar from './NavBar'
 
 function Copyright() {
     return (
@@ -40,31 +37,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: "flex"
     },
-    toolbar: {
-        paddingRight: 24 // keep right padding when drawer closed
-    },
-    toolbarIcon: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-end",
-        padding: "0 8px",
-        ...theme.mixins.toolbar
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen
-        })
-    },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen
-        })
-    },
+
     menuButton: {
         marginRight: 36
     },
@@ -115,7 +88,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Dashboard = ({ auth, history, children }) => {
+const Layout = ({ auth, history, children }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
@@ -128,106 +101,46 @@ const Dashboard = ({ auth, history, children }) => {
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    const { validToken, user } = auth
 
-    const NotLoggedInList = (
-        <MenuList>
-            <MenuItem component={Link} to="/">
-                Home
+    const loginOrProfile = () => {
+
+        return auth.validToken && auth.user ?
+            <MenuList>
+                <MenuItem component={Link} to="/">
+                    Home
             </MenuItem>
-            <MenuItem component={Link} to="/login">
-                Login
+                <MenuItem component={Link} to="/login">
+                    Login
             </MenuItem>
-            <MenuItem component={Link} to="/dashboard">
-                Dashboard
+                <MenuItem component={Link} to="/dashboard">
+                    Dashboard
             </MenuItem>
-        </MenuList>
-    )
-
-
-
-    const LoggedInList = (
-        <MenuList>
-            <MenuItem component={Link} to="/meal">
-                Meal Plan
+            </MenuList>
+            :
+            < MenuList >
+                <MenuItem component={Link} to="/meal">
+                    Meal Plan
             </MenuItem>
-            <MenuItem component={Link} to="/exercise">
-                Exercise Plan
+                <MenuItem component={Link} to="/exercise">
+                    Exercise Plan
             </MenuItem>
-            <MenuItem component={Link} to="/dashboard">
-                Dashboard
+                <MenuItem component={Link} to="/dashboard">
+                    Dashboard
             </MenuItem>
-            <MenuItem component={Link} to="/plans">
-                Purchased Plans
+                <MenuItem component={Link} to="/plans">
+                    Purchased Plans
             </MenuItem>
-            <MenuItem component={Link} to="/login">
-                Log Out
+                <MenuItem component={Link} to="/login">
+                    Log Out
             </MenuItem>
-        </MenuList>
-    )
-
-    const NotLoggedInLinks = (
-
-        <div>
-            <Button color="inherit" component={Link} to="/login">Login</Button>
-            <Button color="inherit" component={Link} to="/signup">Sign Up</Button>
-        </div>
-
-    )
-
-    const LoggedInLinks = (
-        <div>
-            <Button color="inherit" component={Link} to="/profile">{user && user.fullName}</Button>
-            <Button color="inherit" component={Link} to="/logout">Logout</Button>
-        </div>
-    )
-
-    let menuLinks;
-    let buttonLinks;
-
-    if (validToken && user) {
-        menuLinks = LoggedInList
-        buttonLinks = LoggedInLinks
-    } else {
-        menuLinks = NotLoggedInList
-        buttonLinks = NotLoggedInLinks;
+            </MenuList >
     }
 
 
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <AppBar
-                position="absolute"
-                className={clsx(classes.appBar, open && classes.appBarShift)}
-            >
-                <Toolbar className={classes.toolbar}>
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        className={clsx(
-                            classes.menuButton,
-                            open && classes.menuButtonHidden
-                        )}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        component="h1"
-                        variant="h6"
-                        color="inherit"
-                        noWrap
-                        className={classes.title}
-                    >
-                        Hype4fitness
-                </Typography>
-                    <div>
-                        {buttonLinks}
-                    </div>
-                </Toolbar>
-            </AppBar>
+            <NavBar handleDrawerOpen={handleDrawerOpen} />
             <Drawer
                 // variant="permanent"
                 classes={{
@@ -241,7 +154,7 @@ const Dashboard = ({ auth, history, children }) => {
                     </IconButton>
                 </div>
                 <Divider />
-                {menuLinks}
+                {loginOrProfile(auth)}
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
@@ -256,7 +169,7 @@ const Dashboard = ({ auth, history, children }) => {
     );
 }
 
-Dashboard.propTypes = {
+Layout.propTypes = {
     auth: PropTypes.object.isRequired
 }
 
@@ -264,4 +177,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps)(withRouter(Dashboard))
+export default connect(mapStateToProps)(withRouter(Layout))
