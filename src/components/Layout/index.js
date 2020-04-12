@@ -102,21 +102,9 @@ const Layout = ({ auth, history, children }) => {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 
-    const loginOrProfile = () => {
+    const loginOrProfile = (auth) => {
 
         return auth.validToken && auth.user ?
-            <MenuList>
-                <MenuItem component={Link} to="/">
-                    Home
-            </MenuItem>
-                <MenuItem component={Link} to="/login">
-                    Login
-            </MenuItem>
-                <MenuItem component={Link} to="/dashboard">
-                    Dashboard
-            </MenuItem>
-            </MenuList>
-            :
             < MenuList >
                 <MenuItem component={Link} to="/meal">
                     Meal Plan
@@ -134,7 +122,20 @@ const Layout = ({ auth, history, children }) => {
                     Log Out
             </MenuItem>
             </MenuList >
+            :
+            <MenuList>
+                <MenuItem component={Link} to="/">
+                    Home
+            </MenuItem>
+                <MenuItem component={Link} to="/login">
+                    Login
+            </MenuItem>
+                <MenuItem component={Link} to="/dashboard">
+                    Dashboard
+            </MenuItem>
+            </MenuList>
     }
+
 
 
     return (
