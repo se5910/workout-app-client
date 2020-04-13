@@ -20,7 +20,7 @@ const checkTokenExpirationMiddleware = store => next => action => {
       next(action);
 
       logout();
-      next(action);
+
     }
     next(action);
   }
