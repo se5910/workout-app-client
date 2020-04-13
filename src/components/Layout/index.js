@@ -115,7 +115,7 @@ const Layout = ({ auth, history, children }) => {
                 <MenuItem component={Link} to="/dashboard">
                     Dashboard
             </MenuItem>
-                <MenuItem component={Link} to="/plans">
+                <MenuItem component={Link} to="/purchases">
                     Purchased Plans
             </MenuItem>
                 <MenuItem component={Link} to="/login">

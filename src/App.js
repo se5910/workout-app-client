@@ -15,6 +15,8 @@ import setJWTToken from './util/setJWTToken'
 import jwt_decode from 'jwt-decode'
 import { SET_CURRENT_USER } from './actions/types';
 import { logout } from './actions/authActions'
+import ExercisePlans from "./pages/ExercisePlans";
+import Purchases from "./pages/Purchases";
 
 
 
@@ -55,6 +57,8 @@ function App() {
           <Switch>
             <SecureRoute exact path="/dashboard" component={Dashboard} />
             <SecureRoute exact path="/meal" component={MealPlans} />
+            <SecureRoute exact path="/exercise" component={ExercisePlans} />
+            <SecureRoute exact path="/purchases" component={Purchases} />
           </Switch>
         </Layout>
       </Router>
