@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import SignUp from "./pages/SignUp";
+import MealPlans from "./pages/MealPlans"
 import "./App.css";
 import { Provider } from 'react-redux';
 
@@ -53,6 +54,7 @@ function App() {
           }
           <Switch>
             <SecureRoute exact path="/dashboard" component={Dashboard} />
+            <SecureRoute exact path="/meal" component={MealPlans} />
           </Switch>
         </Layout>
       </Router>
