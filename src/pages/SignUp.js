@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,7 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { connect } from 'react-redux'
-import { createNewUser } from '../actions/authActions'
+import { createNewUser, clearErrors } from '../actions/authActions'
+import store from "../store";
+import { GET_ERRORS } from "../actions/types";
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,7 +47,7 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
     fullName: "",
     username: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   })
 
   const {
@@ -64,6 +66,13 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
     createNewUser(formData, history)
   }
 
+  useEffect(() => {
+    store.dispatch({
+      type: GET_ERRORS,
+      payload: {}
+    })
+  }, [])
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -72,7 +81,7 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
         <form className={classes.form} onSubmit={e => onSubmit(e)}>
           <TextField
@@ -148,4 +157,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, { createNewUser })(SignUp)
+export default connect(mapStateToProps, { createNewUser, clearErrors })(SignUp)

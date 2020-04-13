@@ -20,6 +20,14 @@ export const createNewUser = (newUser, history) => async dispatch => {
     })
 }
 
+export const clearErrors = () => dispatch => {
+  console.log("errors")
+  dispatch({
+    type: GET_ERRORS,
+    payload: {}
+  })
+}
+
 export const login = LoginRequest => async dispatch => {
   // post => Login Request
   await axios.post("/api/users/login", LoginRequest)
