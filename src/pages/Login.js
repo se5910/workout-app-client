@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +13,8 @@ import Container from "@material-ui/core/Container";
 import { connect } from 'react-redux'
 import { login } from "../actions/authActions"
 import PropTypes from "prop-types"
+import store from "../store";
+import { GET_ERRORS } from "../actions/types"
 
 
 const useStyles = makeStyles(theme => ({
@@ -52,6 +54,13 @@ const Login = ({ login, errors, auth, history }) => {
     username,
     password
   } = formData
+
+  useEffect(() => {
+    store.dispatch({
+      type: GET_ERRORS,
+      payload: {}
+    })
+  }, [])
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
