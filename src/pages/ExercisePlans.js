@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getExercisePlans } from "../actions/planActions"
+import { getExercisePlans, createExercisePlan } from "../actions/planActions"
 
-const ExercisePlans = ({ getExercisePlans, meal }) => {
+const ExercisePlans = ({ getExercisePlans, createExercisePlan }) => {
+
+
 
     useEffect(() => {
         getExercisePlans()
     }, [])
+
+    const formData = {
+        name: "Test 1",
+    }
+
+    createExercisePlan(formData);
 
     return (
         <div>
@@ -16,4 +24,4 @@ const ExercisePlans = ({ getExercisePlans, meal }) => {
 }
 
 
-export default connect(null, { getExercisePlans })(ExercisePlans)
+export default connect(null, { getExercisePlans, createExercisePlan })(ExercisePlans)
