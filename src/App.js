@@ -17,6 +17,7 @@ import { SET_CURRENT_USER } from './actions/types';
 import { logout } from './actions/authActions'
 import ExercisePlans from "./pages/ExercisePlans";
 import Purchases from "./pages/Purchases";
+import Clients from "./pages/Clients";
 
 
 
@@ -59,6 +60,7 @@ function App() {
             <SecureRoute exact path="/meal" component={MealPlans} />
             <SecureRoute exact path="/exercise" component={ExercisePlans} />
             <SecureRoute exact path="/purchases" component={Purchases} />
+            <SecureRoute exact path="/clients" component={Clients} />
           </Switch>
         </Layout>
       </Router>
