@@ -10,9 +10,7 @@ export default function (state = initialState, action) {
         case GET_MEAL_PLANS:
             return {
                 ...state,
-                plans: {
-                    meals: action.payload
-                }
+                meals: action.payload
             }
         case GET_EXERCISE_PLANS:
             return {
