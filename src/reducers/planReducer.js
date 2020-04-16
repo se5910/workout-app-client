@@ -1,10 +1,8 @@
 import { GET_MEAL_PLANS, GET_EXERCISE_PLANS } from "../actions/types"
 
 const initialState = {
-    plans: {
-        meals: {},
-        exercises: {}
-    },
+    meals: [],
+    exercises: []
 }
 
 export default function (state = initialState, action) {
@@ -19,9 +17,7 @@ export default function (state = initialState, action) {
         case GET_EXERCISE_PLANS:
             return {
                 ...state,
-                plans: {
-                    exercises: action.payload
-                }
+                exercises: action.payload
             }
         default:
             return state
