@@ -1,22 +1,40 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { getMealPlans } from "../actions/planActions"
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getMealPlans, createMealPlan } from "../actions/planActions";
 
-const MealPlans = ({ getMealPlans, meal }) => {
+const MealPlans = ({ getMealPlans, createMealPlan, meals }) => {
+  useEffect(() => {
+    getMealPlans();
+  }, []);
 
-    useEffect(() => {
-        getMealPlans()
-    }, [])
+  const formData = {
+    name: "Test 1",
+  };
 
-    return (
-        <div>
-            <h1>"Aw shit its the meal plans" </h1>
-        </div>
-    )
-}
+  const formData2 = {
+    name: "Test 2",
+  };
 
-const mapStateToProps = state => ({
-    meal: state.plans
-})
+  createMealPlan(formData);
+  createMealPlan(formData2);
 
-export default connect(mapStateToProps, { getMealPlans })(MealPlans)
+  console.log(meals);
+  console.log(typeof plan);
+
+  return (
+    <div>
+      {meals.map((meal) => {
+        return <h1>{meal.name}</h1>;
+      })}
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  meals: state.plans.meals,
+});
+
+export default connect(mapStateToProps, {
+  getMealPlans,
+  createMealPlan,
+})(MealPlans);

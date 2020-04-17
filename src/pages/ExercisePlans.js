@@ -1,40 +1,40 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { getExercisePlans, createExercisePlan } from "../actions/planActions"
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getExercisePlans, createExercisePlan } from "../actions/planActions";
 
 const ExercisePlans = ({ getExercisePlans, createExercisePlan, exercises }) => {
+  useEffect(() => {
+    getExercisePlans();
+  }, []);
 
-    useEffect(() => {
-        getExercisePlans()
-    }, [])
+  const formData = {
+    name: "Test 1",
+  };
 
-    const formData = {
-        name: "Test 1",
-    }
+  const formData2 = {
+    name: "Test 2",
+  };
 
-    const formData2 = {
-        name: "Test 2"
-    }
+  createExercisePlan(formData);
+  createExercisePlan(formData2);
 
-    createExercisePlan(formData);
-    createExercisePlan(formData2);
+  console.log(exercises);
+  console.log(typeof plan);
 
-    console.log(exercises)
+  return (
+    <div>
+      {exercises.map((exercise) => {
+        return <h1>{exercise.name}</h1>;
+      })}
+    </div>
+  );
+};
 
-    console.log(typeof plan)
+const mapStateToProps = (state) => ({
+  exercises: state.plans.exercises,
+});
 
-    return (
-        <div>
-            {exercises.map(exercise => {
-                return <h1>{exercise.name}</h1>
-            })}
-        </div>
-    )
-}
-
-
-const mapStateToProps = state => ({
-    exercises: state.plans.exercises
-})
-
-export default connect(mapStateToProps, { getExercisePlans, createExercisePlan })(ExercisePlans)
+export default connect(mapStateToProps, {
+  getExercisePlans,
+  createExercisePlan,
+})(ExercisePlans);

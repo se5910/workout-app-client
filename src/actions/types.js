@@ -1,7 +1,4 @@
-export const GET_ERRORS = "GET_ERRORS"
-export const SET_CURRENT_USER = "SET_CURRENT_USER"
-
-export const GET_MEAL_PLANS = "GET_MEAL_PLANS"
-
-
-export const GET_EXERCISE_PLANS = "GET_EXERCISE PLANS"
+export const GET_ERRORS = "GET_ERRORS";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const GET_MEAL_PLANS = "GET_MEAL_PLANS";
+export const GET_EXERCISE_PLANS = "GET_EXERCISE_PLANS";
