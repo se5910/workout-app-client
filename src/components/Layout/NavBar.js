@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
         display: "flex"
     },
     toolbar: {
-        paddingRight: 24 // keep right padding when drawer closed
+        paddingRight: 24, // keep right padding when drawer closed
+        backgroundColor: 'rgba(177,27,27,1)'
     },
     toolbarIcon: {
         display: "flex",
@@ -32,7 +33,7 @@ const useStyles = makeStyles(theme => ({
         transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
-        })
+        }),
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -49,6 +50,7 @@ const useStyles = makeStyles(theme => ({
         display: "none"
     },
     title: {
+        fontSize: "100%",
         flexGrow: 1
     },
     drawerPaper: {
@@ -90,6 +92,7 @@ const NavBar = ({ handleDrawerOpen, open, auth, logout, history }) => {
     }
 
     return (
+
         <AppBar
             position="absolute"
             className={clsx(classes.appBar, open && classes.appBarShift)}

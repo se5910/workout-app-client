@@ -1,9 +1,8 @@
-import { GET_MEAL_PLANS } from "../actions/types"
+import { GET_MEAL_PLANS, GET_EXERCISE_PLANS } from "../actions/types"
 
 const initialState = {
-    plans: {
-        meals: {},
-    },
+    meals: [],
+    exercises: []
 }
 
 export default function (state = initialState, action) {
@@ -11,9 +10,12 @@ export default function (state = initialState, action) {
         case GET_MEAL_PLANS:
             return {
                 ...state,
-                plans: {
-                    meals: action.payload
-                }
+                meals: action.payload
+            }
+        case GET_EXERCISE_PLANS:
+            return {
+                ...state,
+                exercises: action.payload
             }
         default:
             return state

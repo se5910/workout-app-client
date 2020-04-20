@@ -17,6 +17,7 @@ import PropTypes from "prop-types"
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import NavBar from './NavBar'
+import Hype4fitness from "../../images/hyp_(1).png";
 
 function Copyright() {
     return (
@@ -85,6 +86,14 @@ const useStyles = makeStyles(theme => ({
     },
     fixedHeight: {
         height: 240
+    },
+    imgFlex: {
+        height: '100%',
+        alignSelf: 'center'
+    },
+    imgColumn: {
+        flexDirection: 'column',
+        display: 'flex'
     }
 }));
 
@@ -98,8 +107,6 @@ const Layout = ({ auth, history, children }) => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 
     const loginOrProfile = (auth) => {
@@ -115,7 +122,7 @@ const Layout = ({ auth, history, children }) => {
                 <MenuItem component={Link} to="/dashboard">
                     Dashboard
             </MenuItem>
-                <MenuItem component={Link} to="/plans">
+                <MenuItem component={Link} to="/purchases">
                     Purchased Plans
             </MenuItem>
                 <MenuItem component={Link} to="/login">
@@ -140,6 +147,7 @@ const Layout = ({ auth, history, children }) => {
 
     return (
         <div className={classes.root}>
+
             <CssBaseline />
             <NavBar handleDrawerOpen={handleDrawerOpen} />
             <Drawer
