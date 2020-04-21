@@ -42,16 +42,10 @@ npm start
 
 This will start the react development server and should open a new tab in a web browser that displays the site.
 
-> > > > > > > Update README.md
-
 ## Built With
 
 -   [React](https://reactjs.org/) - The web framework used
 -   [Redux](https://redux.js.org/) - State management
-<<<<<<< HEAD
-=======
--   [Redux Thunk](https://github.com/reduxjs/redux-thunk) - Asynchronous Redux Action Dispatch
->>>>>>> Update Readme.
 -   [Material-Ui](https://material-ui.com/) - Style framework
 
 ## Authors
