@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { createNewUser, clearErrors } from '../actions/authActions'
 import store from "../store";
 import { GET_ERRORS } from "../actions/types";
+import { Paper } from "@material-ui/core";
 
 
 const useStyles = makeStyles(theme => ({
@@ -19,7 +20,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    padding: '2rem'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -76,10 +78,7 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+      <Paper className={classes.paper}>
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
@@ -147,7 +146,7 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
             Sign Up
           </Button>
         </form>
-      </div>
+      </Paper>
     </Container>
   );
 }
