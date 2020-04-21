@@ -75,7 +75,7 @@ const Login = ({ login, errors, auth, history }) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={3}>
         <Typography component="h1" variant="h5">
           Log in
         </Typography>

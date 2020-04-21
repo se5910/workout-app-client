@@ -17,8 +17,17 @@ import { withRouter } from 'react-router-dom'
 import NavBar from './NavBar'
 import Footer from "./Footer";
 import { ClickAwayListener } from "@material-ui/core";
+import Background from "../../images/redox_01_@2X.png"
 
 
+import {
+    createMuiTheme,
+    responsiveFontSizes,
+    MuiThemeProvider,
+} from "@material-ui/core";
+
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 const drawerWidth = 240;
 
@@ -62,7 +71,8 @@ const useStyles = makeStyles(theme => ({
     content: {
         flexGrow: 1,
         height: "100vh",
-        overflow: "auto"
+        overflow: "auto",
+        backgroundImage: `url(${Background})`
     },
     container: {
         paddingTop: theme.spacing(4),
@@ -136,37 +146,38 @@ const Layout = ({ auth, history, children }) => {
 
 
     return (
-        <div className={classes.root}>
+        <MuiThemeProvider theme={theme}>
+            <div className={classes.root}>
 
-            <CssBaseline />
-            <NavBar handleDrawerOpen={handleDrawerOpen} />
+                <CssBaseline />
+                <NavBar handleDrawerOpen={handleDrawerOpen} />
 
-            <Drawer
-                // variant="permanent"
-                classes={{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
-                }}
-                open={open}
-            >
-                <div className={classes.toolbarIcon}>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </div>
-                <Divider />
-                <ClickAwayListener onClickAway={handleDrawerClose}>
-                    {loginOrProfile(auth)}
-                </ClickAwayListener>
-            </Drawer>
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
-                    {children}
-
-                </Container>
-            </main>
-            <Footer />
-        </div>
+                <Drawer
+                    // variant="permanent"
+                    classes={{
+                        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+                    }}
+                    open={open}
+                >
+                    <div className={classes.toolbarIcon}>
+                        <IconButton onClick={handleDrawerClose}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <ClickAwayListener onClickAway={handleDrawerClose}>
+                        {loginOrProfile(auth)}
+                    </ClickAwayListener>
+                </Drawer>
+                <main className={classes.content}>
+                    <div className={classes.appBarSpacer} />
+                    <Container maxWidth="lg" className={classes.container}>
+                        {children}
+                    </Container>
+                </main>
+                <Footer />
+            </div>
+        </MuiThemeProvider>
     );
 }
 
