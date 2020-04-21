@@ -2,12 +2,14 @@ import React from 'react';
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
+import Container from "@material-ui/core/Container"
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button"
-import { Link, withRouter } from "react-router-dom";
+import Link from "@material-ui/core/Link"
+import { Link as RouterLink, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 import { logout } from '../../actions/authActions'
 
@@ -16,9 +18,8 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
 
     toolbar: {
-        maxWidth: "1337px",
         width: "100%",
-        paddingRight: 24, // keep right padding when drawer closed
+        padding: "0"
     },
     toolbarIcon: {
         display: "flex",
@@ -53,8 +54,7 @@ const useStyles = makeStyles(theme => ({
         display: "none"
     },
     title: {
-        fontSize: "100%",
-        flexGrow: 1
+        flexGrow: 1,
     },
     drawerPaper: {
         position: "relative",
@@ -84,13 +84,13 @@ const NavBar = ({ handleDrawerOpen, open, auth, logout, history }) => {
     const loginOrProfile = (auth) => {
         return auth.validToken && auth.user ?
             <div>
-                <Button color="inherit" component={Link} to="/profile">{auth.user && auth.user.fullName}</Button>
+                <Button color="inherit" component={RouterLink} to="/profile">{auth.user && auth.user.fullName}</Button>
                 <Button color="inherit" onClick={handleLogout}>Logout</Button>
             </div>
             :
             <div>
-                <Button color="inherit" component={Link} to="/login">Login</Button>
-                <Button color="inherit" component={Link} to="/signup">Sign Up</Button>
+                <Button color="inherit" component={RouterLink} to="/login">Login</Button>
+                <Button color="inherit" component={RouterLink} to="/signup">Sign Up</Button>
             </div>
     }
 
@@ -100,33 +100,36 @@ const NavBar = ({ handleDrawerOpen, open, auth, logout, history }) => {
             position="absolute"
             className={clsx(classes.appBar, open && classes.appBarShift)}
         >
-            <Toolbar className={classes.toolbar}>
-                <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    className={clsx(
-                        classes.menuButton,
-                        open && classes.menuButtonHidden
-                    )}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Typography
-                    component="h1"
-                    variant="h6"
-                    color="inherit"
-                    noWrap
-                    className={classes.title}
-                >
-                    Hype4fitness
-                </Typography>
-                <div>
-                    {loginOrProfile(auth)}
-                </div>
-            </Toolbar>
-        </AppBar>
+            <Container maxWidth="lg">
+                <Toolbar className={classes.toolbar}>
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        className={clsx(
+                            classes.menuButton,
+                            open && classes.menuButtonHidden
+                        )}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        className={classes.title}
+                    >
+                        <RouterLink to="/" style={{ 'textDecoration': 'none', 'color': 'white' }}>
+                            Hype4fitness
+                        </RouterLink>
+                    </Typography>
+                    <div>
+                        {loginOrProfile(auth)}
+                    </div>
+                </Toolbar>
+            </Container>
+        </AppBar >
     )
 }
 
