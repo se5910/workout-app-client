@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import NavBar from './NavBar'
 import Footer from "./Footer";
+import { ClickAwayListener } from "@material-ui/core";
 
 
 
@@ -153,7 +154,9 @@ const Layout = ({ auth, history, children }) => {
                     </IconButton>
                 </div>
                 <Divider />
-                {loginOrProfile(auth)}
+                <ClickAwayListener onClickAway={handleDrawerClose}>
+                    {loginOrProfile(auth)}
+                </ClickAwayListener>
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
