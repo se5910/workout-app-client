@@ -3,9 +3,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Container from "@material-ui/core/Container";
@@ -17,26 +15,17 @@ import PropTypes from "prop-types"
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import NavBar from './NavBar'
-import Hype4fitness from "../../images/hyp_(1).png";
+import Footer from "./Footer";
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {"Copyright © "}
-            <Link color="inherit" href="https://material-ui.com/">
-                Hype4fitness
-      </Link>{" "}
-            {new Date().getFullYear()}
-            {"."}
-        </Typography>
-    );
-}
+
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: "flex"
+        display: "flex",
+        flexDirection: "column",
+        height: '100vh'
     },
 
     menuButton: {
@@ -76,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     },
     container: {
         paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4)
+        paddingBottom: theme.spacing(2)
     },
     paper: {
         padding: theme.spacing(2),
@@ -94,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     imgColumn: {
         flexDirection: 'column',
         display: 'flex'
-    }
+    },
 }));
 
 const Layout = ({ auth, history, children }) => {
@@ -115,31 +104,31 @@ const Layout = ({ auth, history, children }) => {
             < MenuList >
                 <MenuItem component={Link} to="/meal">
                     Meal Plan
-            </MenuItem>
+                </MenuItem>
                 <MenuItem component={Link} to="/exercise">
                     Exercise Plan
-            </MenuItem>
+                </MenuItem>
                 <MenuItem component={Link} to="/dashboard">
                     Dashboard
-            </MenuItem>
+                </MenuItem>
                 <MenuItem component={Link} to="/purchases">
                     Purchased Plans
-            </MenuItem>
+                </MenuItem>
                 <MenuItem component={Link} to="/login">
                     Log Out
-            </MenuItem>
+                </MenuItem>
             </MenuList >
             :
             <MenuList>
                 <MenuItem component={Link} to="/">
                     Home
-            </MenuItem>
+                </MenuItem>
                 <MenuItem component={Link} to="/login">
                     Login
-            </MenuItem>
+                </MenuItem>
                 <MenuItem component={Link} to="/dashboard">
-                    Dashboard
-            </MenuItem>
+                    Sign Up
+                </MenuItem>
             </MenuList>
     }
 
@@ -150,6 +139,7 @@ const Layout = ({ auth, history, children }) => {
 
             <CssBaseline />
             <NavBar handleDrawerOpen={handleDrawerOpen} />
+
             <Drawer
                 // variant="permanent"
                 classes={{
@@ -169,11 +159,10 @@ const Layout = ({ auth, history, children }) => {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     {children}
-                    <Box pt={4}>
-                        <Copyright />
-                    </Box>
+
                 </Container>
             </main>
+            <Footer />
         </div>
     );
 }
