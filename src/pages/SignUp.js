@@ -7,6 +7,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux'
 import { createNewUser, clearErrors } from '../actions/authActions'
@@ -74,6 +75,10 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
       payload: {}
     })
   }, [])
+
+  if (auth.validToken) {
+    return <Redirect to="/dashboard" />
+  }
 
   return (
     <Container component="main" maxWidth="xs">

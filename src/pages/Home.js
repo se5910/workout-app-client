@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container'
+import { Redirect } from 'react-router-dom'
 
 import Shane from "../images/Shayne-workout-11.jpg";
 
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 const Home = ({ auth, history }) => {
   const classes = useStyles();
   if (auth.validToken) {
-    history.push("/dashboard")
+    return <Redirect to="/dashboard" />
   }
 
   return (

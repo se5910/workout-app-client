@@ -14,6 +14,7 @@ import { login } from "../actions/authActions"
 import PropTypes from "prop-types"
 import store from "../store";
 import { GET_ERRORS } from "../actions/types"
+import { Redirect } from 'react-router-dom'
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,10 +39,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = ({ login, errors, auth, history }) => {
-  // Don't display if logged in
-  if (auth.validToken) {
-    history.push("/dashboard")
-  }
 
   const classes = useStyles();
 
@@ -70,6 +67,11 @@ const Login = ({ login, errors, auth, history }) => {
     e.preventDefault()
 
     login(formData)
+  }
+
+  // Don't display if logged in
+  if (auth.validToken) {
+    return <Redirect to="/dashboard" />
   }
 
   return (
