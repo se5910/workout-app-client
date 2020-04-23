@@ -3,12 +3,12 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-const SecureRoute = ({ component: Component, auth, ...otherProps }) => {
+const SecureRoute = ({ component: Component, auth: { validToken, loading }, ...rest }) => {
   return (
     <Route
-      {...otherProps}
+      {...rest}
       render={props =>
-        auth.validToken === true ?
+        validToken && !loading ?
           (<Component {...props} />) : (<Redirect to="/login" />)
       } />
   )

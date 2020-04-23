@@ -18,6 +18,7 @@ import { logout } from './actions/authActions'
 import ExercisePlans from "./pages/ExercisePlans";
 import Purchases from "./pages/Purchases";
 import Clients from "./pages/Clients";
+import CreateProfile from "./components/profile-forms/CreateProfile"
 
 
 
@@ -61,6 +62,7 @@ function App() {
             <SecureRoute exact path="/exercise" component={ExercisePlans} />
             <SecureRoute exact path="/purchases" component={Purchases} />
             <SecureRoute exact path="/clients" component={Clients} />
+            <SecureRoute exact path="/create-profile" component={CreateProfile} />
           </Switch>
         </Layout>
       </Router>
