@@ -155,6 +155,7 @@ const CreateProfile = ({
                         variant="outlined"
                         margin="normal"
                         fullWidth
+                        type="number"
                         name="bodyFatPercentage"
                         label="Body Fat Percentage"
                         id="bodyFatPercentage"
@@ -165,6 +166,7 @@ const CreateProfile = ({
                         variant="outlined"
                         margin="normal"
                         fullWidth
+                        type="number"
                         name="restingHeartRate"
                         label="Resting Heart Rate"
                         id="restingHeartRate"
