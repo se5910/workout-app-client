@@ -4,16 +4,12 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { verifyCoach, logout } from '../../actions/authActions';
 
-const CoachDashboard = ({ auth, coach, verifyCoach, logout }) => {
+const CoachDashboard = ({ auth, coach: { isCoach }, verifyCoach, logout }) => {
     useEffect(() => {
         verifyCoach();
     }, []);
 
     if (!auth.validToken) {
-        return <Redirect to="/" />
-    }
-
-    if (!coach) {
         logout();
     }
 
@@ -27,6 +23,8 @@ const CoachDashboard = ({ auth, coach, verifyCoach, logout }) => {
 CoachDashboard.propTypes = {
     auth: PropTypes.object.isRequired,
     coach: PropTypes.object.isRequired,
+    verifyCoach: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

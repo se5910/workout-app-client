@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profileActions';
 
 const ClientDashboard = ({ auth: { user }, profile: { profile, loading }, getCurrentProfile }) => {
+    useEffect(() => {
+        getCurrentProfile();
+    }, [])
+
     return (
         <Fragment>
             <h1 className="large text-primary">

@@ -56,16 +56,23 @@ export const login = LoginRequest => async dispatch => {
     })
 }
 
-export const verifyCoach = async dispatch => {
+export const verifyCoach = () => async dispatch => {
   try {
-    const res = axios.get("/coach");
+    const res = await axios.get('api/coach');
 
     dispatch({
       type: VERIFY_COACH,
       payload: res.data
-    });
+    })
   } catch (err) {
-
+    // dispatch({
+    //     type: PROFILE_ERROR,
+    //     payload: { msg: err.response.statusText, status: err.response.status }
+    // })
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    })
   }
 }
 
