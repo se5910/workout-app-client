@@ -16,7 +16,7 @@ export const getCurrentProfile = () => async dispatch => {
         })
         dispatch({
             type: GET_ERRORS,
-            payload: {}
+            payload: err.response.data
         })
     }
 }
@@ -24,7 +24,7 @@ export const getCurrentProfile = () => async dispatch => {
 
 export const createClientAndProfile = (formData, history, edit = false) => async dispatch => {
     try {
-        const res = await axios.post('/api/users/client', formData);
+        const res = await axios.post('/api/client', formData);
 
         dispatch({
             type: GET_PROFILE,
@@ -41,7 +41,7 @@ export const createClientAndProfile = (formData, history, edit = false) => async
         })
         dispatch({
             type: GET_ERRORS,
-            payload: {}
+            payload: err.response.data
         })
     }
 }
