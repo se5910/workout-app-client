@@ -68,7 +68,7 @@ const Home = ({ auth, history }) => {
         </Button>
         <Button
           component={Link}
-          to="/signup"
+          to="/login"
           variant="contained"
           color="primary"
         >
