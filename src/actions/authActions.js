@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ERRORS, SET_CURRENT_USER, CLEAR_PROFILE } from './types'
+import { GET_ERRORS, SET_CURRENT_USER, CLEAR_PROFILE, VERIFY_COACH } from './types'
 import jwt_decode from 'jwt-decode'
 import setJWTToken from '../util/setJWTToken'
 
@@ -54,6 +54,19 @@ export const login = LoginRequest => async dispatch => {
         })
       }
     })
+}
+
+export const verifyCoach = async dispatch => {
+  try {
+    const res = axios.get("/coach");
+
+    dispatch({
+      type: VERIFY_COACH,
+      payload: res.data
+    });
+  } catch (err) {
+
+  }
 }
 
 export const logout = () => dispatch => {
