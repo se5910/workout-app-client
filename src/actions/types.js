@@ -6,5 +6,6 @@ export const GET_EXERCISE_PLANS = "GET_EXERCISE_PLANS";
 export const GET_PROFILE = 'GET_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 export const VERIFY_COACH = 'VERIFY_COACH';

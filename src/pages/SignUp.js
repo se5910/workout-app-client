@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -11,7 +10,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { createNewUser, clearErrors } from '../actions/authActions'
 import store from "../store";
-import { GET_ERRORS } from "../actions/types";
+import { GET_ERRORS, CLEAR_ERRORS } from "../actions/types";
 import { Paper } from "@material-ui/core";
 
 
@@ -52,6 +51,8 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
     confirmPassword: "",
   })
 
+  const [confirmError, setConfirmError] = useState(false);
+
   const {
     fullName,
     username,
@@ -65,7 +66,17 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    createNewUser(formData, history)
+    if (password !== confirmPassword) {
+      setConfirmError(true);
+    } else {
+      if (confirmError) {
+        setConfirmError(false)
+      }
+      if (errors) {
+        store.dispatch({ type: CLEAR_ERRORS })
+      }
+      createNewUser(formData, history)
+    }
   }
 
   useEffect(() => {
@@ -136,8 +147,8 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
             type="password"
             id="confirmPassword"
             value={confirmPassword}
-            error={errors.confirmPassword ? true : false}
-            helperText={errors.confirmPassword}
+            error={confirmError ? true : false}
+            helperText="Passwords do not match"
             onChange={e => onChange(e)}
           />
           <Button
