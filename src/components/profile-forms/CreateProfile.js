@@ -107,7 +107,7 @@ const CreateProfile = ({
                         name="height"
                         value={height}
                         autoFocus
-                        error={errors.height ? true : false}
+                        error={errors.height}
                         helperText={errors.height}
                         onChange={e => onChange(e)}
                     />
@@ -121,7 +121,7 @@ const CreateProfile = ({
                         label="Current Weight"
                         name="weight"
                         value={weight}
-                        error={errors.weight ? true : false}
+                        error={errors.weight}
                         helperText={errors.weight}
                         onChange={e => onChange(e)}
                     />
@@ -134,7 +134,7 @@ const CreateProfile = ({
                         label="Goal Weight"
                         id="goalWeight"
                         value={goalWeight}
-                        error={errors.goalWeigh ? true : false}
+                        error={errors.goalWeight}
                         helperText={errors.goalWeight}
                         onChange={e => onChange(e)}
                     />
@@ -147,7 +147,7 @@ const CreateProfile = ({
                         label="Age"
                         id="age"
                         value={age}
-                        error={errors.age ? true : false}
+                        error={errors.age}
                         helperText={errors.age}
                         onChange={e => onChange(e)}
                     />
@@ -194,6 +194,8 @@ const CreateProfile = ({
                         id="healthHistory"
                         value={healthHistory}
                         onChange={e => onChange(e)}
+                        error={errors.healthHistory}
+                        helperText={errors.healthHistory}
                     />
 
                     <Button
