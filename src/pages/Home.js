@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container'
 import { Link, Redirect } from 'react-router-dom'
 
-import Shane from "../images/Shayne-workout-11.jpg";
+import Shane from "../images/Shayne-workout-11-blur90.jpg";
 
 
 const useStyles = makeStyles(theme => ({
@@ -54,7 +54,7 @@ const Home = ({ auth, history }) => {
   return (
     <Container className={classes.paper} maxWidth='lg'>
       <Typography variant="h2" component="h2" className={classes.h1} responsive>
-        Hello Please register or login
+        Hello, Please register or login
       </Typography>
       <div className={classes.buttons}>
         <Button
