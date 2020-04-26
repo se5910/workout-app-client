@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import Shane from "../images/Shayne-workout-11.jpg";
 
@@ -58,8 +58,22 @@ const Home = ({ auth, history }) => {
         Hello Please register or login
       </Typography>
       <div className={classes.buttons}>
-        <Button variant="contained" color="secondary">Signup</Button>
-        <Button variant="contained" color="primary">Login</Button>
+        <Button
+          component={Link}
+          to="/signup"
+          variant="contained"
+          color="secondary"
+        >
+          Signup
+        </Button>
+        <Button
+          component={Link}
+          to="/login"
+          variant="contained"
+          color="primary"
+        >
+          Login
+        </Button>
       </div>
     </Container>
   )

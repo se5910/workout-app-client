@@ -1,27 +1,30 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import React, { Fragment, useEffect } from 'react';
+import Button from '@material-ui/core/Button'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Link, Redirect } from 'react-router-dom';
+import CoachDashboard from '../components/Dashboards/CoachDashboard';
+import ClientDashboard from '../components/Dashboards/ClientDashboard';
 
-const Dashboard = () => {
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+const Dashboard = ({ auth: { user } }) => {
 
+  const { isCoach } = user;
   return (
-    <div>
-      <h1>Hello from dashboard</h1>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-        </Tabs>
-      </AppBar>
-    </div>
+    <Fragment>
+      {isCoach ? <CoachDashboard /> : <ClientDashboard />}
+    </Fragment>
   )
+
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+  auth: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile,
+})
+
+export default connect(mapStateToProps)(Dashboard);
