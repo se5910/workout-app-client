@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect } from 'react';
-import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
 import CoachDashboard from '../components/Dashboards/CoachDashboard';
 import ClientDashboard from '../components/Dashboards/ClientDashboard';
 
 
 const Dashboard = ({ auth: { user } }) => {
+  useEffect(() => { })
 
   const { isCoach } = user;
   return (

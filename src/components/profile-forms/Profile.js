@@ -7,12 +7,23 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Redirect } from 'react-router-dom';
 
 import store from "../../store";
 import { GET_ERRORS } from "../../actions/types";
 import { Paper } from "@material-ui/core";
-import { createClientAndProfile } from '../../actions/profileActions';
+import { createOrUpdateClientAndProfile, getCurrentProfile } from '../../actions/profileActions';
+
+const initialState = {
+    name: '',
+    height: '',
+    weight: '',
+    goalWeight: '',
+    age: '',
+    bodyFatPercentage: '',
+    restingHeartRate: '',
+    goalStatement: '',
+    healthHistory: '',
+}
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -38,23 +49,31 @@ const useStyles = makeStyles(theme => ({
 const CreateProfile = ({
     history,
     auth: { user, validToken },
-    profile: { profile },
+    profile: { profile, loading },
     errors,
-    createClientAndProfile }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        height: '',
-        weight: '',
-        goalWeight: '',
-        age: '',
-        bodyFatPercentage: '',
-        restingHeartRate: '',
-        goalStatement: '',
-        healthHistory: '',
-    });
+    createOrUpdateClientAndProfile,
+    getCurrentProfile,
+}) => {
+    const [formData, setFormData] = useState(initialState);
+
+    useEffect(() => {
+        if (!profile) getCurrentProfile();
+        if (!loading && profile) {
+            const profileData = { ...initialState };
+            for (const key in profile) {
+                if (key in profile) profileData[key] = profile[key];
+            }
+            setFormData(profileData);
+        } else {
+            setFormData({ ...formData, name: user.fullName })
+        }
+        store.dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        })
+    }, [getCurrentProfile, setFormData, loading])
 
     const {
-        name,
         height,
         weight,
         goalWeight,
@@ -73,28 +92,17 @@ const CreateProfile = ({
 
     const onSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
-        createClientAndProfile(formData, history);
+        console.log(formData);
+        createOrUpdateClientAndProfile(formData, history, profile ? true : false);
     }
 
-    useEffect(() => {
-        setFormData({ ...formData, name: user.fullName })
-        store.dispatch({
-            type: GET_ERRORS,
-            payload: {}
-        })
-    }, [])
-
-    if (validToken && profile) {
-        return <Redirect to='/dashboard' />
-    }
 
     return (
         <Container component="main" maxWidth="md">
             <CssBaseline />
             <Paper className={classes.paper} elevation={3}>
                 <Typography component="h1" variant="h5">
-                    Create Profile
+                    Edit Your Profile
                 </Typography>
                 <form className={classes.form} onSubmit={e => onSubmit(e)}>
                     <TextField
@@ -215,7 +223,8 @@ const CreateProfile = ({
 
 CreateProfile.propTypes = {
     auth: PropTypes.object.isRequired,
-    createClientAndProfile: PropTypes.func.isRequired,
+    createOrUpdateClientAndProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -224,4 +233,4 @@ const mapStateToProps = state => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps, { createClientAndProfile })(CreateProfile)
+export default connect(mapStateToProps, { createOrUpdateClientAndProfile, getCurrentProfile })(CreateProfile)

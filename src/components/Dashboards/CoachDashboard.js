@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { verifyCoach, logout } from '../../actions/authActions';
 
 const CoachDashboard = ({ auth, coach: { isCoach }, verifyCoach, logout }) => {
     useEffect(() => {
         verifyCoach();
-    }, []);
+    }, [verifyCoach]);
 
     if (!auth.validToken) {
         logout();

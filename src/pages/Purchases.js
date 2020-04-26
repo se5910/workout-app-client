@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 
-const Purchases = ({ }) => {
+const Purchases = (props) => {
     return (
         <div>
             <h1>"Aw shit its the purchases page" </h1>

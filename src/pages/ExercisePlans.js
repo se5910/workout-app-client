@@ -5,7 +5,7 @@ import { getExercisePlans, createExercisePlan } from "../actions/planActions";
 const ExercisePlans = ({ getExercisePlans, createExercisePlan, exercises }) => {
   useEffect(() => {
     getExercisePlans();
-  }, []);
+  }, [getExercisePlans]);
 
   const formData = {
     name: "Test 1",
