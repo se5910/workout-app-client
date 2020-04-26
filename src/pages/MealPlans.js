@@ -5,7 +5,7 @@ import { getMealPlans, createMealPlan } from "../actions/planActions";
 const MealPlans = ({ getMealPlans, createMealPlan, meals }) => {
   useEffect(() => {
     getMealPlans();
-  }, []);
+  }, [getMealPlans]);
 
   const formData = {
     name: "Test 1",
