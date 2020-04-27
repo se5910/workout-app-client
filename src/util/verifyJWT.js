@@ -1,8 +1,5 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
+const verifyJWT = (token) => {};
 
-const verifyJWT = token => {
-
-}
-
-export default verifyJWT
+export default verifyJWT;

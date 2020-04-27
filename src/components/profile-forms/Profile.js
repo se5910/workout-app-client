@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,39 +11,42 @@ import Container from "@material-ui/core/Container";
 import store from "../../store";
 import { GET_ERRORS } from "../../actions/types";
 import { Paper } from "@material-ui/core";
-import { createOrUpdateClientAndProfile, getCurrentProfile } from '../../actions/profileActions';
+import {
+    createOrUpdateClientAndProfile,
+    getCurrentProfile,
+} from "../../actions/profileActions";
 
 const initialState = {
-    name: '',
-    height: '',
-    weight: '',
-    goalWeight: '',
-    age: '',
-    bodyFatPercentage: '',
-    restingHeartRate: '',
-    goalStatement: '',
-    healthHistory: '',
-}
+    name: "",
+    height: "",
+    weight: "",
+    goalWeight: "",
+    age: "",
+    bodyFatPercentage: "",
+    restingHeartRate: "",
+    goalStatement: "",
+    healthHistory: "",
+};
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: '2rem'
+        padding: "2rem",
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.secondary.main,
     },
     form: {
         width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2)
-    }
+        margin: theme.spacing(3, 0, 2),
+    },
 }));
 
 const CreateProfile = ({
@@ -65,13 +68,13 @@ const CreateProfile = ({
             }
             setFormData(profileData);
         } else {
-            setFormData({ ...formData, name: user.fullName })
+            setFormData({ ...formData, name: user.fullName });
         }
         store.dispatch({
             type: GET_ERRORS,
-            payload: {}
-        })
-    }, [getCurrentProfile, setFormData, loading])
+            payload: {},
+        });
+    }, [getCurrentProfile, setFormData, loading]);
 
     const {
         height,
@@ -87,15 +90,18 @@ const CreateProfile = ({
     const classes = useStyles();
 
     const onChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const onSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         console.log(formData);
-        createOrUpdateClientAndProfile(formData, history, profile ? true : false);
-    }
-
+        createOrUpdateClientAndProfile(
+            formData,
+            history,
+            profile ? true : false
+        );
+    };
 
     return (
         <Container component="main" maxWidth="md">
@@ -104,60 +110,60 @@ const CreateProfile = ({
                 <Typography component="h1" variant="h5">
                     Edit Your Profile
                 </Typography>
-                <form className={classes.form} onSubmit={e => onSubmit(e)}>
+                <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
                     <TextField
                         variant="outlined"
                         margin="normal"
                         fullWidth
                         id="height"
-                        type='number'
+                        type="number"
                         label="Height (in inches)"
                         name="height"
                         value={height}
                         autoFocus
                         error={errors.height}
                         helperText={errors.height}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                     />
 
                     <TextField
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                        type='number'
+                        type="number"
                         id="weight"
                         label="Current Weight"
                         name="weight"
                         value={weight}
                         error={errors.weight}
                         helperText={errors.weight}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                     />
                     <TextField
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                        weight='number'
+                        weight="number"
                         name="goalWeight"
                         label="Goal Weight"
                         id="goalWeight"
                         value={goalWeight}
                         error={errors.goalWeight}
                         helperText={errors.goalWeight}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                     />
                     <TextField
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                        type='number'
+                        type="number"
                         name="age"
                         label="Age"
                         id="age"
                         value={age}
                         error={errors.age}
                         helperText={errors.age}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                     />
                     <TextField
                         variant="outlined"
@@ -168,7 +174,7 @@ const CreateProfile = ({
                         label="Body Fat Percentage"
                         id="bodyFatPercentage"
                         value={bodyFatPercentage}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                     />
                     <TextField
                         variant="outlined"
@@ -179,7 +185,7 @@ const CreateProfile = ({
                         label="Resting Heart Rate"
                         id="restingHeartRate"
                         value={restingHeartRate}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                     />
                     <TextField
                         variant="outlined"
@@ -191,7 +197,7 @@ const CreateProfile = ({
                         label="Goal Statement"
                         id="goalStatement"
                         value={goalStatement}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                     />
                     <TextField
                         variant="outlined"
@@ -201,7 +207,7 @@ const CreateProfile = ({
                         label="Health History"
                         id="healthHistory"
                         value={healthHistory}
-                        onChange={e => onChange(e)}
+                        onChange={(e) => onChange(e)}
                         error={errors.healthHistory}
                         helperText={errors.healthHistory}
                     />
@@ -218,19 +224,22 @@ const CreateProfile = ({
                 </form>
             </Paper>
         </Container>
-    )
-}
+    );
+};
 
 CreateProfile.propTypes = {
     auth: PropTypes.object.isRequired,
     createOrUpdateClientAndProfile: PropTypes.func.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     auth: state.auth,
     errors: state.errors,
-    profile: state.profile
-})
+    profile: state.profile,
+});
 
-export default connect(mapStateToProps, { createOrUpdateClientAndProfile, getCurrentProfile })(CreateProfile)
+export default connect(mapStateToProps, {
+    createOrUpdateClientAndProfile,
+    getCurrentProfile,
+})(CreateProfile);

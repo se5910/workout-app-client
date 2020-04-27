@@ -1,9 +1,9 @@
-import { VERIFY_COACH } from '../actions/types';
+import { VERIFY_COACH } from "../actions/types";
 
 const initialState = {
     coach: null,
-    loading: true
-}
+    loading: true,
+};
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
@@ -13,8 +13,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 coach: payload,
-                loading: false
-            }
+                loading: false,
+            };
         default:
             return state;
     }

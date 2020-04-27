@@ -11,14 +11,13 @@ import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
-import PropTypes from "prop-types"
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
-import NavBar from './NavBar'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { ClickAwayListener } from "@material-ui/core";
-import Background from "../../images/redox_01_@2X.png"
-
+import Background from "../../images/redox_01_@2X.png";
 
 import {
     createMuiTheme,
@@ -31,21 +30,21 @@ theme = responsiveFontSizes(theme);
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "column",
-        height: '100vh'
+        height: "100vh",
     },
 
     menuButton: {
-        marginRight: 36
+        marginRight: 36,
     },
     menuButtonHidden: {
-        display: "none"
+        display: "none",
     },
     title: {
-        flexGrow: 1
+        flexGrow: 1,
     },
     drawerPaper: {
         position: "relative",
@@ -53,47 +52,47 @@ const useStyles = makeStyles(theme => ({
         width: drawerWidth,
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen
-        })
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
     drawerPaperClose: {
         overflowX: "hidden",
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen
+            duration: theme.transitions.duration.leavingScreen,
         }),
         width: theme.spacing(7),
         [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(9)
-        }
+            width: theme.spacing(9),
+        },
     },
     appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
         height: "100vh",
         overflow: "auto",
-        backgroundImage: `url(${Background})`
+        backgroundImage: `url(${Background})`,
     },
     container: {
         paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(2)
+        paddingBottom: theme.spacing(2),
     },
     paper: {
         padding: theme.spacing(2),
         display: "flex",
         overflow: "auto",
-        flexDirection: "column"
+        flexDirection: "column",
     },
     fixedHeight: {
-        height: 240
+        height: 240,
     },
     imgFlex: {
-        height: '100%',
-        alignSelf: 'center'
+        height: "100%",
+        alignSelf: "center",
     },
     imgColumn: {
-        flexDirection: 'column',
-        display: 'flex'
+        flexDirection: "column",
+        display: "flex",
     },
 }));
 
@@ -108,11 +107,9 @@ const Layout = ({ auth, history, children }) => {
         setOpen(false);
     };
 
-
     const loginOrProfile = (auth) => {
-
-        return auth.validToken && auth.user ?
-            < MenuList >
+        return auth.validToken && auth.user ? (
+            <MenuList>
                 <MenuItem component={Link} to="/meal">
                     Meal Plan
                 </MenuItem>
@@ -128,8 +125,8 @@ const Layout = ({ auth, history, children }) => {
                 <MenuItem component={Link} to="/login">
                     Log Out
                 </MenuItem>
-            </MenuList >
-            :
+            </MenuList>
+        ) : (
             <MenuList>
                 <MenuItem component={Link} to="/">
                     Home
@@ -141,21 +138,22 @@ const Layout = ({ auth, history, children }) => {
                     Sign Up
                 </MenuItem>
             </MenuList>
-    }
-
-
+        );
+    };
 
     return (
         <MuiThemeProvider theme={theme}>
             <div className={classes.root}>
-
                 <CssBaseline />
                 <NavBar handleDrawerOpen={handleDrawerOpen} />
 
                 <Drawer
                     // variant="permanent"
                     classes={{
-                        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+                        paper: clsx(
+                            classes.drawerPaper,
+                            !open && classes.drawerPaperClose
+                        ),
                     }}
                     open={open}
                 >
@@ -179,14 +177,14 @@ const Layout = ({ auth, history, children }) => {
             </div>
         </MuiThemeProvider>
     );
-}
+};
 
 Layout.propTypes = {
-    auth: PropTypes.object.isRequired
-}
+    auth: PropTypes.object.isRequired,
+};
 
-const mapStateToProps = state => ({
-    auth: state.auth
-})
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
 
-export default connect(mapStateToProps)(withRouter(Layout))
+export default connect(mapStateToProps)(withRouter(Layout));

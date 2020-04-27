@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
-import { verifyCoach, logout } from '../../actions/authActions';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { verifyCoach, logout } from "../../actions/authActions";
 
 const CoachDashboard = ({ auth, coach: { isCoach }, verifyCoach, logout }) => {
     useEffect(() => {
@@ -12,23 +12,21 @@ const CoachDashboard = ({ auth, coach: { isCoach }, verifyCoach, logout }) => {
         logout();
     }
 
-    return (
-        <div>
-            Coach Dashboard
-        </div>
-    )
-}
+    return <div>Coach Dashboard</div>;
+};
 
 CoachDashboard.propTypes = {
     auth: PropTypes.object.isRequired,
     coach: PropTypes.object.isRequired,
     verifyCoach: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     auth: state.auth,
-    coach: state.coach
+    coach: state.coach,
 });
 
-export default connect(mapStateToProps, { verifyCoach, logout })(CoachDashboard)
+export default connect(mapStateToProps, { verifyCoach, logout })(
+    CoachDashboard
+);

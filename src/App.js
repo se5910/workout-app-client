@@ -5,70 +5,91 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import SignUp from "./pages/SignUp";
-import MealPlans from "./pages/MealPlans"
+import MealPlans from "./pages/MealPlans";
 import "./App.css";
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 
 import store from "./store";
-import SecureRoute from './util/SecureRoute'
-import setJWTToken from './util/setJWTToken'
-import jwt_decode from 'jwt-decode'
-import { SET_CURRENT_USER } from './actions/types';
-import { logout } from './actions/authActions'
+import SecureRoute from "./util/SecureRoute";
+import setJWTToken from "./util/setJWTToken";
+import jwt_decode from "jwt-decode";
+import { SET_CURRENT_USER } from "./actions/types";
+import { logout } from "./actions/authActions";
 import ExercisePlans from "./pages/ExercisePlans";
 import Purchases from "./pages/Purchases";
 import Clients from "./pages/Clients";
-import Profile from "./components/profile-forms/Profile"
-
-
+import Profile from "./components/profile-forms/Profile";
 
 function App() {
+    console.log("checking");
+    const jwtToken = localStorage.jwtToken;
 
-  console.log("checking")
-  const jwtToken = localStorage.jwtToken
+    if (jwtToken) {
+        setJWTToken(jwtToken);
+        const decoded_jwtToken = jwt_decode(jwtToken);
+        store.dispatch({
+            type: SET_CURRENT_USER,
+            payload: decoded_jwtToken,
+        });
 
-  if (jwtToken) {
-    setJWTToken(jwtToken)
-    const decoded_jwtToken = jwt_decode(jwtToken)
-    store.dispatch({
-      type: SET_CURRENT_USER,
-      payload: decoded_jwtToken
-    })
-
-    const currentTime = Date.now() / 1000
-    if (decoded_jwtToken.exp < currentTime) {
-      store.dispatch(logout())
-      window.location.href = "/"
+        const currentTime = Date.now() / 1000;
+        if (decoded_jwtToken.exp < currentTime) {
+            store.dispatch(logout());
+            window.location.href = "/";
+        }
     }
-  }
 
-  return (
-    <Provider store={store}>
-      <Router>
-        <Layout>
-          {
-            // Public
-          }
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login" component={Login} />
+    return (
+        <Provider store={store}>
+            <Router>
+                <Layout>
+                    {
+                        // Public
+                    }
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/signup" component={SignUp} />
+                    <Route exact path="/login" component={Login} />
 
-          {
-            // Protected
-          }
-          <Switch>
-            <SecureRoute exact path="/dashboard" component={Dashboard} />
-            <SecureRoute exact path="/meal" component={MealPlans} />
-            <SecureRoute exact path="/exercise" component={ExercisePlans} />
-            <SecureRoute exact path="/purchases" component={Purchases} />
-            <SecureRoute exact path="/clients" component={Clients} />
-            <SecureRoute exact path="/create-profile" component={Profile} />
-            <SecureRoute exact path="/update-profile" component={Profile} />
-          </Switch>
-        </Layout>
-      </Router>
-    </Provider>
-  );
+                    {
+                        // Protected
+                    }
+                    <Switch>
+                        <SecureRoute
+                            exact
+                            path="/dashboard"
+                            component={Dashboard}
+                        />
+                        <SecureRoute exact path="/meal" component={MealPlans} />
+                        <SecureRoute
+                            exact
+                            path="/exercise"
+                            component={ExercisePlans}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/purchases"
+                            component={Purchases}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/clients"
+                            component={Clients}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/create-profile"
+                            component={Profile}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/update-profile"
+                            component={Profile}
+                        />
+                    </Switch>
+                </Layout>
+            </Router>
+        </Provider>
+    );
 }
 
 export default App;
