@@ -134,7 +134,7 @@ const Layout = ({ auth, history, children }) => {
                 <MenuItem component={Link} to="/login">
                     Login
                 </MenuItem>
-                <MenuItem component={Link} to="/dashboard">
+                <MenuItem component={Link} to="/signup">
                     Sign Up
                 </MenuItem>
             </MenuList>
