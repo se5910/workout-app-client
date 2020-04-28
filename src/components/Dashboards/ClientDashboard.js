@@ -22,7 +22,14 @@ const ClientDashboard = ({
             </p>
             {profile !== null ? (
                 <Fragment>
-                    <Button>Edit Profile</Button>
+                    <Button
+                        component={Link}
+                        to="/update-profile"
+                        variant="contained"
+                        color="secondary"
+                    >
+                        Edit Profile
+                    </Button>
                 </Fragment>
             ) : (
                 <Fragment>
@@ -34,7 +41,6 @@ const ClientDashboard = ({
                         to="/create-profile"
                         variant="contained"
                         color="primary"
-                        className="btn btn-primary my-1"
                     >
                         Create Profile
                     </Button>
