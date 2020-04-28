@@ -24,7 +24,7 @@ function Copyright() {
 
 const useStyles = makeStyles({
     footer: {
-        padding: "2rem",
+        padding: ".5rem",
         marginTop: "auto",
         backgroundColor: "rgba(177,27,27,1)",
     },
