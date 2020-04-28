@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Spinner } from "../components/Layout/Spinner";
 
 const SecureRoute = ({
     component: Component,
@@ -12,7 +13,9 @@ const SecureRoute = ({
         <Route
             {...rest}
             render={(props) =>
-                validToken && !loading ? (
+                loading ? (
+                    <Spinner />
+                ) : validToken ? (
                     <Component {...props} />
                 ) : (
                     <Redirect to="/login" />
