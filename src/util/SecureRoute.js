@@ -13,7 +13,7 @@ const SecureRoute = ({
         <Route
             {...rest}
             render={(props) =>
-                loading ? (
+                loading && validToken ? (
                     <Spinner />
                 ) : validToken ? (
                     <Component {...props} />
