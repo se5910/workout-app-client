@@ -19,6 +19,7 @@ import ExercisePlans from "./pages/ExercisePlans";
 import Purchases from "./pages/Purchases";
 import Clients from "./pages/Clients";
 import Profile from "./components/profile-forms/Profile";
+import NotFound from "./pages/NotFound";
 
 function App() {
     console.log("checking");
@@ -43,17 +44,18 @@ function App() {
         <Provider store={store}>
             <Router>
                 <Layout>
-                    {
-                        // Public
-                    }
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/signup" component={SignUp} />
-                    <Route exact path="/login" component={Login} />
-
-                    {
-                        // Protected
-                    }
                     <Switch>
+                        {
+                            // Public
+                        }
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/signup" component={SignUp} />
+                        <Route exact path="/login" component={Login} />
+
+                        {
+                            // Protected
+                        }
+
                         <SecureRoute
                             exact
                             path="/dashboard"
@@ -85,6 +87,7 @@ function App() {
                             path="/update-profile"
                             component={Profile}
                         />
+                        <Route component={NotFound} />
                     </Switch>
                 </Layout>
             </Router>
