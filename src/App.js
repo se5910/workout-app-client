@@ -17,8 +17,9 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/authActions";
 import ExercisePlans from "./pages/ExercisePlans";
 import Purchases from "./pages/Purchases";
-import Clients from "./pages/Clients";
+import ClientDetail from "./pages/ClientDetail/ClientDetail";
 import Profile from "./components/profile-forms/Profile";
+
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -74,11 +75,6 @@ function App() {
                         />
                         <SecureRoute
                             exact
-                            path="/clients"
-                            component={Clients}
-                        />
-                        <SecureRoute
-                            exact
                             path="/create-profile"
                             component={Profile}
                         />
@@ -86,6 +82,11 @@ function App() {
                             exact
                             path="/update-profile"
                             component={Profile}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id"
+                            component={ClientDetail}
                         />
                         <Route component={NotFound} />
                     </Switch>
