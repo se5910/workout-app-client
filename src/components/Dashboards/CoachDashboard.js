@@ -9,9 +9,10 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { verifyCoach, logout } from "../../actions/authActions";
+import { getClients } from "../../actions/coachActions";
 
 const useStyles = makeStyles({
     table: {
@@ -31,10 +32,17 @@ const rows = [
     createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-const CoachDashboard = ({ auth, coach: { coach }, verifyCoach, logout }) => {
+const CoachDashboard = ({
+    auth,
+    coach: { coach, clients },
+    verifyCoach,
+    logout,
+    getClients,
+}) => {
     const classes = useStyles();
     useEffect(() => {
         verifyCoach();
+        getClients();
     }, [verifyCoach]);
 
     if (!coach) {
@@ -85,6 +93,6 @@ const mapStateToProps = (state) => ({
     coach: state.coach,
 });
 
-export default connect(mapStateToProps, { verifyCoach, logout })(
+export default connect(mapStateToProps, { verifyCoach, logout, getClients })(
     CoachDashboard
 );
