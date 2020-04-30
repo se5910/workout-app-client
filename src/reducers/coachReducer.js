@@ -1,8 +1,9 @@
-import { VERIFY_COACH } from "../actions/types";
+import { VERIFY_COACH, GET_CLIENTS } from "../actions/types";
 
 const initialState = {
     coach: null,
     loading: true,
+    clients: null,
 };
 
 export default function (state = initialState, action) {
@@ -13,6 +14,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 coach: payload,
+                loading: false,
+            };
+
+        case GET_CLIENTS:
+            return {
+                ...state,
+                clients: payload,
                 loading: false,
             };
         default:

@@ -9,9 +9,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { verifyCoach, logout } from "../../actions/authActions";
+import { getClients } from "../../actions/coachActions";
+import { ClientRow } from "./ClientRow";
 
 const useStyles = makeStyles({
     table: {
@@ -19,23 +21,32 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+function createData(name, coach) {
+    return { name, coach };
 }
 
-const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-const CoachDashboard = ({ auth, coach: { coach }, verifyCoach, logout }) => {
+const CoachDashboard = ({
+    auth,
+    coach: { coach, clients, loading },
+    verifyCoach,
+    logout,
+    getClients,
+}) => {
     const classes = useStyles();
+
+    const rows = [];
+
     useEffect(() => {
         verifyCoach();
-    }, [verifyCoach]);
+        if (!clients) {
+            getClients();
+        }
+        if (!loading && clients) {
+            for (const key in clients) {
+                rows.push(createData(key.name, key.coach));
+            }
+        }
+    }, [verifyCoach, getClients]);
 
     if (!coach) {
         return <Redirect to="/dashboard" />;
@@ -56,16 +67,10 @@ const CoachDashboard = ({ auth, coach: { coach }, verifyCoach, logout }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="right">
-                                    {row.calories}
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {clients &&
+                            clients.map((row) => (
+                                <ClientRow key={row.id} client={row} />
+                            ))}
                     </TableBody>
                 </Table>
             </TableContainer>
@@ -85,6 +90,6 @@ const mapStateToProps = (state) => ({
     coach: state.coach,
 });
 
-export default connect(mapStateToProps, { verifyCoach, logout })(
+export default connect(mapStateToProps, { verifyCoach, logout, getClients })(
     CoachDashboard
 );
