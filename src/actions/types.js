@@ -10,3 +10,4 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 export const VERIFY_COACH = "VERIFY_COACH";
 export const GET_CLIENTS = "GET_CLIENTS";
+export const GET_CLIENT = "GET_CLIENT";
