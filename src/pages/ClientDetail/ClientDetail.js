@@ -1,20 +1,51 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import ClientCard from "./ClientCard";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 import { getClient } from "../../actions/coachActions";
+import { getClientExercisePlans } from "../../actions/planActions";
+import ExercisePlanCard from "./ExercisePlanCard";
+import MealPlanCard from "./MealPlanCard";
+import { Container } from "@material-ui/core";
 
-const ClientDetail = ({ match, coach: { client, loading }, getClient }) => {
+const useStyles = makeStyles({
+    root: {
+        minWidth: 275,
+    },
+    title: {
+        fontSize: 14,
+    },
+    item: {
+        marginBottom: 12,
+    },
+});
+
+const ClientDetail = ({
+    match,
+    coach: { client, loading },
+    plans: { meal, exercise },
+    getClient,
+    getClientExercisePlans,
+}) => {
+    const classes = useStyles();
     const { id } = match.params;
 
     useEffect(() => {
         getClient(id);
+        getClientExercisePlans(id);
     }, [getClient, id]);
 
     return (
-        <Fragment>
-            <ClientCard client={client} />
-        </Fragment>
+        <Container>
+            <ClientCard className={classes.marginBottom} client={client} />
+            <ExercisePlanCard
+                className={classes.marginBottom}
+                plans={exercise}
+                clientId={1}
+            />
+            <MealPlanCard />
+        </Container>
     );
 };
 
@@ -25,6 +56,9 @@ ClientDetail.propTypes = {
 
 const mapStateToProps = (state) => ({
     coach: state.coach,
+    plans: state.plans,
 });
 
-export default connect(mapStateToProps, { getClient })(ClientDetail);
+export default connect(mapStateToProps, { getClient, getClientExercisePlans })(
+    ClientDetail
+);
