@@ -19,6 +19,7 @@ import ExercisePlans from "./pages/ExercisePlans";
 import Purchases from "./pages/Purchases";
 import ClientDetail from "./pages/ClientDetail/ClientDetail";
 import Profile from "./components/profile-forms/Profile";
+import ExercisePlan from "./pages/ExercisePlan";
 
 import NotFound from "./pages/NotFound";
 
@@ -87,6 +88,11 @@ function App() {
                             exact
                             path="/client/:id"
                             component={ClientDetail}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/exercise-plan/:id"
+                            component={ExercisePlan}
                         />
                         <Route component={NotFound} />
                     </Switch>
