@@ -1,8 +1,12 @@
-import { GET_MEAL_PLANS, GET_EXERCISE_PLANS } from "../actions/types";
+import {
+    GET_MEAL_PLANS,
+    GET_EXERCISE_PLANS,
+    CLIENT_EXERCISE_PLANS,
+} from "../actions/types";
 
 const initialState = {
-    meals: [],
-    exercises: [],
+    meal: null,
+    exercise: null,
 };
 
 export default function (state = initialState, action) {
@@ -10,12 +14,17 @@ export default function (state = initialState, action) {
         case GET_MEAL_PLANS:
             return {
                 ...state,
-                meals: action.payload,
+                meal: action.payload,
             };
         case GET_EXERCISE_PLANS:
             return {
                 ...state,
-                exercises: action.payload,
+                exercise: action.payload,
+            };
+        case CLIENT_EXERCISE_PLANS:
+            return {
+                ...state,
+                exercise: action.payload,
             };
         default:
             return state;
