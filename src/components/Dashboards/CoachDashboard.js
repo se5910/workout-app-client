@@ -14,7 +14,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { verifyCoach, logout } from "../../actions/authActions";
 import { getClients } from "../../actions/coachActions";
-import { ClientRow } from "./ClientRow";
+import ClientRow from "./ClientRow";
 
 const useStyles = makeStyles({
     table: {

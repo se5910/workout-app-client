@@ -34,3 +34,17 @@ export const getClient = (id) => async (dispatch) => {
         }
     }
 };
+
+export const approveClient = (clientId) => async (dispatch) => {
+    try {
+        const res = await axios.post(`api/coach/approve/${clientId}`);
+        dispatch(getClients());
+    } catch (err) {
+        if (err.response && err.response.data) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            });
+        }
+    }
+};
