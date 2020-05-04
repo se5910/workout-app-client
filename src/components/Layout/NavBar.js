@@ -81,7 +81,11 @@ const NavBar = ({ handleDrawerOpen, open, auth, logout, history }) => {
     const loginOrProfile = (auth) => {
         return auth.validToken && auth.user ? (
             <div>
-                <Button color="inherit" component={RouterLink} to="/profile">
+                <Button
+                    color="inherit"
+                    component={RouterLink}
+                    to="/edit-profile"
+                >
                     {auth.user && auth.user.fullName}
                 </Button>
                 <Button color="inherit" onClick={handleLogout}>

@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
     root: {
@@ -17,6 +18,9 @@ const useStyles = makeStyles({
     item: {
         marginBottom: 12,
     },
+    padding: {
+        padding: "3rem",
+    },
 });
 
 const ClientCard = ({ client }) => {
@@ -24,67 +28,43 @@ const ClientCard = ({ client }) => {
 
     return (
         <Card className={classes.root}>
-            <CardContent>
-                <Typography variant="h5" component="h2">
-                    {client && client.name}
-                </Typography>
+            <CardContent className={classes.padding}>
+                <Typography variant="h3">{client && client.name}</Typography>
                 <hr></hr>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Height: {client && client.height}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Weight: {client && client.weight}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Goal Weight: {client && client.goalWeight}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Age: {client && client.age}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Body Fat Percentage: {client && client.bodyFatPercentage}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Resting Heart Rate: {client && client.restingHeartRate}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Goal Statement: {client && client.goalStatement}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Health History:{client && client.healthHistory}
-                </Typography>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={6} lg={6}>
+                        <Typography className={classes.item} variant="h5">
+                            Height: {client && client.height} inches
+                        </Typography>
+                        <Typography className={classes.item} variant="h5">
+                            Weight: {client && client.weight} lbs
+                        </Typography>
+                        <Typography className={classes.item} variant="h5">
+                            Goal Weight: {client && client.goalWeight} lbs
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={6}>
+                        <Typography className={classes.item} variant="h5">
+                            Body Fat Percentage:{" "}
+                            {client && client.bodyFatPercentage} %
+                        </Typography>
+                        <Typography className={classes.item} variant="h5">
+                            Resting Heart Rate:{" "}
+                            {client && client.restingHeartRate} Bpm
+                        </Typography>
+                        <Typography className={classes.item} variant="h5">
+                            Age: {client && client.age} years old
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography className={classes.item} variant="h5">
+                            Goal Statement: {client && client.goalStatement}
+                        </Typography>
+                        <Typography className={classes.item} variant="h5">
+                            Health History:{client && client.healthHistory}
+                        </Typography>
+                    </Grid>
+                </Grid>
             </CardContent>
         </Card>
     );

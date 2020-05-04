@@ -20,9 +20,12 @@ import Purchases from "./pages/Purchases";
 import ClientDetail from "./pages/ClientDetail/ClientDetail";
 import Profile from "./components/profile-forms/Profile";
 import ExercisePlan from "./pages/ExercisePlan";
+import CreateExercisePlan from "./pages/plans/CreateExercisePlan";
+import CreateMealPlan from "./pages/plans/CreateMealPlan";
 
 import NotFound from "./pages/NotFound";
 
+// Make sure the token is valid and persist
 function App() {
     console.log("checking");
     const jwtToken = localStorage.jwtToken;
@@ -93,6 +96,16 @@ function App() {
                             exact
                             path="/client/:id/exercise-plan/:id"
                             component={ExercisePlan}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/create-exercise-plan"
+                            component={CreateExercisePlan}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/create-meal-plan"
+                            component={CreateMealPlan}
                         />
                         <Route component={NotFound} />
                     </Switch>

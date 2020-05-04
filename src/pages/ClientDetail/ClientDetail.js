@@ -7,7 +7,10 @@ import { getClient } from "../../actions/coachActions";
 import { getClientExercisePlans } from "../../actions/planActions";
 import ExercisePlanCard from "./ExercisePlanCard";
 import MealPlanCard from "./MealPlanCard";
-import { Container } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import { Container, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -39,12 +42,57 @@ const ClientDetail = ({
     return (
         <Container>
             <ClientCard className={classes.marginBottom} client={client} />
-            <ExercisePlanCard
-                className={classes.marginBottom}
-                plans={exercise}
-                clientId={1}
-            />
-            <MealPlanCard />
+            {exercise && exercise.length !== 0 ? (
+                <ExercisePlanCard
+                    className={classes.marginBottom}
+                    plans={exercise}
+                    clientId={1}
+                />
+            ) : (
+                <Paper style={{ marginTop: "1.5rem" }}>
+                    <Container style={{ padding: "3rem" }}>
+                        <Typography>
+                            No Exericse plans have been created
+                        </Typography>
+                        <Button
+                            component={Link}
+                            to={
+                                client &&
+                                `/client/${client.id}/create-exercise-plan`
+                            }
+                            variant="contained"
+                            color="primary"
+                        >
+                            Create a plan
+                        </Button>
+                    </Container>
+                </Paper>
+            )}
+
+            {meal && meal.length !== 0 ? (
+                <MealPlanCard
+                    className={classes.marginBottom}
+                    plans={exercise}
+                    clientId={1}
+                />
+            ) : (
+                <Paper style={{ marginTop: "1.5rem" }}>
+                    <Container style={{ padding: "3rem" }}>
+                        <Typography>No Meal plans have been created</Typography>
+                        <Button
+                            component={Link}
+                            to={
+                                client &&
+                                `/client/${client.id}/create-meal-plan`
+                            }
+                            variant="contained"
+                            color="primary"
+                        >
+                            Create a plan
+                        </Button>
+                    </Container>
+                </Paper>
+            )}
         </Container>
     );
 };
