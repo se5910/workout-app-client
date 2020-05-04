@@ -35,6 +35,8 @@ const ClientDashboard = ({
                         Edit Profile
                     </Button>
                 </Fragment>
+            ) : profile && profile.approved ? (
+                <Typography>Approved</Typography>
             ) : (
                 <Fragment>
                     <p>
