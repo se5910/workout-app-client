@@ -1,4 +1,9 @@
-import { GET_MEAL_PLANS, GET_EXERCISE_PLANS, GET_ERRORS } from "./types";
+import {
+    GET_MEAL_PLANS,
+    GET_EXERCISE_PLANS,
+    CLIENT_EXERCISE_PLANS,
+    GET_ERRORS,
+} from "./types";
 import axios from "axios";
 
 export const createMealPlan = (formData) => async (dispatch) => {
@@ -55,4 +60,19 @@ export const getExercisePlans = () => async (dispatch) => {
                 payload: err.response.data,
             });
         });
+};
+
+export const getClientExercisePlans = (id) => async (dispatch) => {
+    try {
+        const res = await axios.get(`/api/exercisePlan/client/${id}`);
+        dispatch({
+            type: CLIENT_EXERCISE_PLANS,
+            payload: res.data,
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data,
+        });
+    }
 };
