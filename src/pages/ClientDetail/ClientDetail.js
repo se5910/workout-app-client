@@ -4,7 +4,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { getClient } from "../../actions/coachActions";
-import { getClientExercisePlans } from "../../actions/planActions";
+import {
+    getClientExercisePlans,
+    getClientMealPlans,
+} from "../../actions/planActions";
 import ExercisePlanCard from "./ExercisePlanCard";
 import MealPlanCard from "./MealPlanCard";
 import Paper from "@material-ui/core/Paper";
@@ -30,6 +33,7 @@ const ClientDetail = ({
     plans: { meal, exercise },
     getClient,
     getClientExercisePlans,
+    getClientMealPlans,
 }) => {
     const classes = useStyles();
     const { id } = match.params;
@@ -37,6 +41,7 @@ const ClientDetail = ({
     useEffect(() => {
         getClient(id);
         getClientExercisePlans(id);
+        getClientMealPlans(id);
     }, [getClient, id]);
 
     return (
@@ -46,13 +51,13 @@ const ClientDetail = ({
                 <ExercisePlanCard
                     className={classes.marginBottom}
                     plans={exercise}
-                    clientId={1}
+                    clientId={id}
                 />
             ) : (
                 <Paper style={{ marginTop: "1.5rem" }}>
                     <Container style={{ padding: "3rem" }}>
                         <Typography>
-                            No Exericse plans have been created
+                            No Exercise plans have been created
                         </Typography>
                         <Button
                             component={Link}
@@ -73,7 +78,7 @@ const ClientDetail = ({
                 <MealPlanCard
                     className={classes.marginBottom}
                     plans={exercise}
-                    clientId={1}
+                    clientId={id}
                 />
             ) : (
                 <Paper style={{ marginTop: "1.5rem" }}>
@@ -107,6 +112,8 @@ const mapStateToProps = (state) => ({
     plans: state.plans,
 });
 
-export default connect(mapStateToProps, { getClient, getClientExercisePlans })(
-    ClientDetail
-);
+export default connect(mapStateToProps, {
+    getClient,
+    getClientExercisePlans,
+    getClientMealPlans,
+})(ClientDetail);

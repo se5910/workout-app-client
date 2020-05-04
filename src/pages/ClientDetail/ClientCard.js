@@ -70,6 +70,8 @@ const ClientCard = ({ client }) => {
     );
 };
 
-ClientCard.propTypes = {};
+ClientCard.propTypes = {
+    client: PropTypes.object.isRequired,
+};
 
 export default ClientCard;

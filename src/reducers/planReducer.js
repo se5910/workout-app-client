@@ -2,6 +2,7 @@ import {
     GET_MEAL_PLANS,
     GET_EXERCISE_PLANS,
     CLIENT_EXERCISE_PLANS,
+    CLIENT_MEAL_PLANS,
 } from "../actions/types";
 
 const initialState = {
@@ -25,6 +26,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 exercise: action.payload,
+            };
+        case CLIENT_MEAL_PLANS:
+            return {
+                ...state,
+                meal: action.payload,
             };
         default:
             return state;

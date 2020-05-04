@@ -22,8 +22,6 @@ const useStyles = makeStyles({
 const ExercisePlanCard = ({ plans, clientId }) => {
     const classes = useStyles();
 
-    console.log(plans);
-
     return (
         <Card className={classes.root}>
             <CardContent>
