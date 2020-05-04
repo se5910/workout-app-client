@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profileActions";
@@ -20,8 +21,11 @@ const ClientDashboard = ({
             <p>
                 <i className="fas fa-user"> Welcome {user && user.fullName}</i>
             </p>
-            {profile !== null ? (
+            {profile !== null && profile.approved === false ? (
                 <Fragment>
+                    <Typography variant="h5">
+                        Please wait for approval
+                    </Typography>
                     <Button
                         component={Link}
                         to="/update-profile"
