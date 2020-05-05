@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { getClientExercisePlans } from "../../../actions/planActions";
@@ -33,7 +34,7 @@ const ClientExercisePlans = ({
                 Exercise Plans
             </Typography>
             <hr />
-            {exercisePlans &&
+            {exercisePlans && exercisePlans.length > 0 ? (
                 exercisePlans.map((plan) => (
                     <Typography
                         variant="h5"
@@ -44,7 +45,12 @@ const ClientExercisePlans = ({
                     >
                         {plan.name}
                     </Typography>
-                ))}
+                ))
+            ) : (
+                <Container style={{ padding: ".5rem" }}>
+                    <Typography>No Exercise plans have been created</Typography>
+                </Container>
+            )}
         </Paper>
     );
 };

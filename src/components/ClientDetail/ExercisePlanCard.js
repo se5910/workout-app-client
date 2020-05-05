@@ -29,7 +29,7 @@ const ExercisePlanCard = ({ plans, clientId, client }) => {
     const classes = useStyles();
 
     const noPlans = (
-        <Container style={{ padding: "3rem" }}>
+        <Container style={{ padding: ".5rem" }}>
             <Typography>No Exercise plans have been created</Typography>
         </Container>
     );
@@ -38,7 +38,7 @@ const ExercisePlanCard = ({ plans, clientId, client }) => {
         <Card className={classes.root}>
             <CardContent>
                 <List>
-                    {plans
+                    {plans && plans.length > 0
                         ? plans.map((plan) => (
                               <ListItem>
                                   <Typography
