@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-import { List, ListItem, ListItemIcon } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -60,13 +60,17 @@ const ExercisePlanCard = ({ plans, clientId, client }) => {
                     variant="contained"
                     color="primary"
                 >
-                    Create a plan
+                    Create an Exercise Plan
                 </Button>
             </CardContent>
         </Card>
     );
 };
 
-ExercisePlanCard.propTypes = {};
+ExercisePlanCard.propTypes = {
+    plans: PropTypes.object.isRequired,
+    clientId: PropTypes.number.isRequired,
+    client: PropTypes.object.isRequired,
+};
 
 export default ExercisePlanCard;

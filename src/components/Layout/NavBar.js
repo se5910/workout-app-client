@@ -84,7 +84,7 @@ const NavBar = ({ handleDrawerOpen, open, auth, logout, history }) => {
                 <Button
                     color="inherit"
                     component={RouterLink}
-                    to="/edit-profile"
+                    to="/update-profile"
                 >
                     {auth.user && auth.user.fullName}
                 </Button>

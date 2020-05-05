@@ -92,7 +92,12 @@ const CreateExercisePlan = ({
     );
 };
 
-CreateExercisePlan.propTypes = {};
+CreateExercisePlan.propTypes = {
+    errors: PropTypes.object.isRequired,
+    createExercisePlan: PropTypes.func.isRequired,
+    client: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
     errors: state.errors,

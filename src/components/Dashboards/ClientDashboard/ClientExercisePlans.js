@@ -55,6 +55,12 @@ const ClientExercisePlans = ({
     );
 };
 
+ClientExercisePlans.propTypes = {
+    profile: PropTypes.object.isRequired,
+    plans: PropTypes.object.isRequired,
+    getClientExercisePlans: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
     profile: state.profile,
     plans: state.plans,

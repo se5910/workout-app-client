@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-
-import { connect } from "react-redux";
-import { Paper } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { createTemplate } from "../../actions/planActions";
+import TextField from "@material-ui/core/TextField";
+import { Paper, Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { getTemplate, createTemplate } from "../../actions/planActions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -32,16 +29,36 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Template = ({ history, createTemplate, match }) => {
+const initialState = {
+    id: "",
+    name: "",
+    workoutType: "",
+    phase: "",
+};
+
+const Template = ({
+    match,
+    getTemplate,
+    createTemplate,
+    template: { template, loading },
+    history,
+}) => {
+    const { id, exerciseId, templateId } = match.params;
+
     const classes = useStyles();
 
-    const { id, exerciseId } = match.params;
+    const [formData, setFormData] = useState(initialState);
 
-    const [formData, setFormData] = useState({
-        name: "",
-        workoutType: "",
-        phase: "",
-    });
+    useEffect(() => {
+        getTemplate(id, exerciseId, templateId);
+        if (!loading && template) {
+            const profileData = { ...initialState };
+            for (const key in template) {
+                if (key in template) profileData[key] = template[key];
+            }
+            setFormData(profileData);
+        }
+    }, [loading, getTemplate, setFormData]);
 
     const { name, workoutType, phase } = formData;
 
@@ -56,10 +73,9 @@ const Template = ({ history, createTemplate, match }) => {
 
     return (
         <Container component="main" maxWidth="md">
-            <CssBaseline />
             <Paper className={classes.paper} elevation={3}>
                 <Typography component="h1" variant="h5">
-                    Create Template
+                    Edit Template
                 </Typography>
                 <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
                     <TextField
@@ -112,7 +128,14 @@ const Template = ({ history, createTemplate, match }) => {
 };
 
 Template.propTypes = {
-    createTemplate: PropTypes.func.isRequired,
+    getTemplate: PropTypes.func.isRequired,
+    template: PropTypes.object.isRequired,
 };
 
-export default connect(null, { createTemplate })(Template);
+const mapStateToProps = (state) => ({
+    template: state.plans,
+});
+
+export default connect(mapStateToProps, { getTemplate, createTemplate })(
+    Template
+);
