@@ -59,6 +59,10 @@ const ExerciseSlotCard = ({ template, clientId, planId }) => {
     );
 };
 
-TemplateCard.propTypes = {};
+ExerciseSlotCard.propTypes = {
+    template: PropTypes.object.isRequired,
+    clientId: PropTypes.number,
+    planId: PropTypes.number,
+};
 
 export default ExerciseSlotCard;

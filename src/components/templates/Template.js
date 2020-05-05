@@ -35,13 +35,9 @@ const Template = ({
 
     const classes = useStyles();
 
-    // Trigger a rerender
-    const [, updateState] = useState();
-    const forceUpdate = useCallback(() => updateState({}), []);
-    console.log("render");
     useEffect(() => {
         getTemplate(id, exerciseId, templateId);
-    }, [exerciseId, getTemplate, id, templateId]);
+    }, []);
     return (
         <Paper style={{ height: "100%" }}>
             <Container>
@@ -83,7 +79,6 @@ const Template = ({
                         onClick={() => {
                             createExerciseSlot(id, exerciseId, templateId);
                             getTemplate(id, exerciseId, templateId);
-                            forceUpdate();
                         }}
                     >
                         Create An Exercise

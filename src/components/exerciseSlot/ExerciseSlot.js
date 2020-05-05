@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
@@ -10,7 +10,7 @@ import { createWeek } from "../../actions/planActions";
 import Select from "@material-ui/core/Select";
 import { FormControl, MenuItem } from "@material-ui/core";
 import { connect } from "react-redux";
-import { createExerciseSlot } from "../../actions/planActions";
+import { createExerciseSlot, getWeeks } from "../../actions/planActions";
 
 import bench1 from "../../images/bench1.jpg";
 import bench2 from "../../images/bench2.jpg";
@@ -79,6 +79,9 @@ const ExerciseSlot = ({
         );
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    useEffect(() => {
+        getWeeks(clientId, exercisePlanId, templateId, slotId);
+    }, []);
 
     return (
         <Container>
@@ -133,6 +136,10 @@ const ExerciseSlot = ({
                                             <WeekCard
                                                 className={classes.card}
                                                 week={week}
+                                                clientId={clientId}
+                                                exercisePlanId={exercisePlanId}
+                                                templateId={templateId}
+                                                slotId={slotId}
                                             />
                                         </Grid>
                                     );

@@ -151,3 +151,45 @@ export const createWeek = (
         }
     }
 };
+
+export const getWeeks = (
+    clientId,
+    planId,
+    templateId,
+    exerciseSlotId
+) => async (dispatch) => {
+    try {
+        axios.get(
+            `/api/client/${clientId}/exercisePlan/${planId}/template/${templateId}/exerciseSlot/${exerciseSlotId}/week`
+        );
+    } catch (err) {
+        if (err && err.response) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            });
+        }
+    }
+};
+
+export const createSet = (
+    clientId,
+    planId,
+    templateId,
+    exerciseSlotId,
+    formData
+) => async (dispatch) => {
+    try {
+        await axios.post(
+            `/api/client/${clientId}/exercisePlan/${planId}/template/${templateId}/exerciseSlot/${exerciseSlotId}/week`,
+            formData
+        );
+    } catch (err) {
+        if (err && err.response) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            });
+        }
+    }
+};
