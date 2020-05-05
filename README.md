@@ -46,6 +46,8 @@ This will start the react development server and should open a new tab in a web 
 
 -   [React](https://reactjs.org/) - The web framework used
 -   [Redux](https://redux.js.org/) - State management
+-   [Redux Thunk](https://github.com/reduxjs/redux-thunk) - Asynchronous Redux Action Dispatch
+-   [Redux Thunk](https://github.com/reduxjs/redux-thunk) - Asynchronous Redux Action Dispatch
 -   [Material-Ui](https://material-ui.com/) - Style framework
 
 ## Authors
