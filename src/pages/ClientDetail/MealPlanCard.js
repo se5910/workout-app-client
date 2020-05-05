@@ -4,6 +4,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -18,72 +20,22 @@ const useStyles = makeStyles({
     },
 });
 
-const MealPlanCard = ({ client }) => {
+const MealPlanCard = ({ clientId, plans }) => {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
             <CardContent>
-                <Typography variant="h5" component="h2">
-                    {client && client.name}
-                </Typography>
-                <hr></hr>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Height: {client && client.height}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Weight: {client && client.weight}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Goal Weight: {client && client.goalWeight}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Age: {client && client.age}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Body Fat Percentage: {client && client.bodyFatPercentage}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Resting Heart Rate: {client && client.restingHeartRate}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Goal Statement: {client && client.goalStatement}
-                </Typography>
-                <Typography
-                    className={classes.item}
-                    variant="h5"
-                    component="h2"
-                >
-                    Health History:{client && client.healthHistory}
-                </Typography>
+                {plans &&
+                    plans.map((plan) => (
+                        <Typography
+                            variant="h5"
+                            component={RouterLink}
+                            to={`/client/${clientId}/meal-plan/${plan.planId}`}
+                        >
+                            {plan.name}
+                        </Typography>
+                    ))}
             </CardContent>
         </Card>
     );

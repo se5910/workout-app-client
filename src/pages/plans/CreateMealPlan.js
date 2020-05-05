@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CreateMealPlan = ({ errors, client }) => {
+const CreateMealPlan = ({ errors, client, createMealPlan }) => {
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
@@ -95,4 +95,4 @@ const mapStateToProps = (state) => ({
     client: state.coach.client,
 });
 
-export default connect(mapStateToProps)(CreateMealPlan);
+export default connect(mapStateToProps, { createMealPlan })(CreateMealPlan);

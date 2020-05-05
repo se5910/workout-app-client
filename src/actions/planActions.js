@@ -10,6 +10,7 @@ import axios from "axios";
 export const createMealPlan = (clientId, formData) => async (dispatch) => {
     try {
         axios.post(`/api/client/${clientId}/mealPlan`, formData);
+        console.log("from ");
     } catch (err) {
         dispatch({
             GET_ERRORS,

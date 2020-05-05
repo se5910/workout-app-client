@@ -77,7 +77,7 @@ const ClientDetail = ({
             {meal && meal.length !== 0 ? (
                 <MealPlanCard
                     className={classes.marginBottom}
-                    plans={exercise}
+                    plans={meal}
                     clientId={id}
                 />
             ) : (

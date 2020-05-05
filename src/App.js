@@ -20,6 +20,7 @@ import Purchases from "./pages/Purchases";
 import ClientDetail from "./pages/ClientDetail/ClientDetail";
 import Profile from "./components/profile-forms/Profile";
 import ExercisePlan from "./pages/ExercisePlan";
+import MealPlan from "./pages/MealPlan";
 import CreateExercisePlan from "./pages/plans/CreateExercisePlan";
 import CreateMealPlan from "./pages/plans/CreateMealPlan";
 
@@ -94,8 +95,13 @@ function App() {
                         />
                         <SecureRoute
                             exact
-                            path="/client/:id/exercise-plan/:id"
+                            path="/client/:id/exercise-plan/:planId"
                             component={ExercisePlan}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/meal-plan/:planId"
+                            component={MealPlan}
                         />
                         <SecureRoute
                             exact

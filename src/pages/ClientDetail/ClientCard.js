@@ -61,7 +61,7 @@ const ClientCard = ({ client }) => {
                             Goal Statement: {client && client.goalStatement}
                         </Typography>
                         <Typography className={classes.item} variant="h5">
-                            Health History:{client && client.healthHistory}
+                            Health History: {client && client.healthHistory}
                         </Typography>
                     </Grid>
                 </Grid>
