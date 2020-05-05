@@ -62,7 +62,7 @@ const MealPlanCard = ({ client, clientId, plans }) => {
                     color="primary"
                     className={classes.button}
                 >
-                    Create a plan
+                    Create a Meal Plan
                 </Button>
             </CardContent>
         </Card>

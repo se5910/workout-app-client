@@ -60,7 +60,7 @@ const ExercisePlanCard = ({ plans, clientId, client }) => {
                     variant="contained"
                     color="primary"
                 >
-                    Create a plan
+                    Create an Exercise Plan
                 </Button>
             </CardContent>
         </Card>
