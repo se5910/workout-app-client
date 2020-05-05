@@ -8,10 +8,12 @@ import {
 } from "./types";
 import axios from "axios";
 
-export const createMealPlan = (clientId, formData) => async (dispatch) => {
+export const createMealPlan = (clientId, formData, history) => async (
+    dispatch
+) => {
     try {
         await axios.post(`/api/client/${clientId}/mealPlan`, formData);
-        console.log("from ");
+        history.goBack();
     } catch (err) {
         dispatch({
             GET_ERRORS,
@@ -53,9 +55,12 @@ export const getMealPlanById = (clientId, planId) => async (dispatch) => {
     }
 };
 
-export const createExercisePlan = (clientId, formData) => async (dispatch) => {
+export const createExercisePlan = (clientId, formData, history) => async (
+    dispatch
+) => {
     try {
         axios.post(`/api/client/${clientId}/exercisePlan`, formData);
+        history.goBack();
     } catch (err) {
         dispatch({
             GET_ERRORS,
@@ -90,9 +95,11 @@ export const getExercisePlanById = (clientId, planId) => async (dispatch) => {
             payload: res.data,
         });
     } catch (err) {
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data,
-        });
+        if (err && err.response) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            });
+        }
     }
 };

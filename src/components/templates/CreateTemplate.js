@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+
 import { connect } from "react-redux";
-import { createExercisePlan } from "../../actions/planActions";
-import PropTypes from "prop-types";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,14 +30,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
+const Template = ({ history }) => {
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
         name: "",
+        workoutType: "",
+        phase: "",
     });
 
-    const { name } = formData;
+    const { name, workoutType, phase } = formData;
 
     const onChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,7 +47,6 @@ const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        createExercisePlan(client.id, formData);
     };
 
     return (
@@ -54,7 +54,7 @@ const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
             <CssBaseline />
             <Paper className={classes.paper} elevation={3}>
                 <Typography component="h1" variant="h5">
-                    Create Exercise plan
+                    Create Template
                 </Typography>
                 <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
                     <TextField
@@ -62,13 +62,32 @@ const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
                         margin="normal"
                         fullWidth
                         id="name"
-                        type="text"
-                        label="Exercise Plan Name"
+                        label="Template Name"
                         name="name"
                         value={name}
                         autoFocus
-                        error={errors.height}
-                        helperText={errors.height}
+                        onChange={(e) => onChange(e)}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="workoutType"
+                        label="Workout Type"
+                        name="workoutType"
+                        value={workoutType}
+                        autoFocus
+                        onChange={(e) => onChange(e)}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="phase"
+                        label="Phase"
+                        name="phase"
+                        value={phase}
+                        autoFocus
                         onChange={(e) => onChange(e)}
                     />
 
@@ -79,7 +98,7 @@ const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Submit
+                        Sign Up
                     </Button>
                 </form>
             </Paper>
@@ -87,13 +106,4 @@ const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
     );
 };
 
-CreateExercisePlan.propTypes = {};
-
-const mapStateToProps = (state) => ({
-    errors: state.errors,
-    client: state.coach.client,
-});
-
-export default connect(mapStateToProps, { createExercisePlan })(
-    CreateExercisePlan
-);
+export default connect()(Template);

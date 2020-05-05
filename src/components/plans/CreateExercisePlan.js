@@ -7,8 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { connect } from "react-redux";
+import { createExercisePlan } from "../../actions/planActions";
 import PropTypes from "prop-types";
-import { createMealPlan } from "../../actions/planActions";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,7 +31,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CreateMealPlan = ({ errors, client, createMealPlan }) => {
+const CreateExercisePlan = ({
+    errors,
+    createExercisePlan,
+    client,
+    history,
+}) => {
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
@@ -46,8 +51,7 @@ const CreateMealPlan = ({ errors, client, createMealPlan }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log("submitted");
-        createMealPlan(client.id, formData);
+        createExercisePlan(client.id, formData, history);
     };
 
     return (
@@ -55,7 +59,7 @@ const CreateMealPlan = ({ errors, client, createMealPlan }) => {
             <CssBaseline />
             <Paper className={classes.paper} elevation={3}>
                 <Typography component="h1" variant="h5">
-                    Create Meal plan
+                    Create Exercise plan
                 </Typography>
                 <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
                     <TextField
@@ -64,7 +68,7 @@ const CreateMealPlan = ({ errors, client, createMealPlan }) => {
                         fullWidth
                         id="name"
                         type="text"
-                        label="Meal Plan Name"
+                        label="Exercise Plan Name"
                         name="name"
                         value={name}
                         autoFocus
@@ -88,11 +92,13 @@ const CreateMealPlan = ({ errors, client, createMealPlan }) => {
     );
 };
 
-CreateMealPlan.propTypes = {};
+CreateExercisePlan.propTypes = {};
 
 const mapStateToProps = (state) => ({
     errors: state.errors,
     client: state.coach.client,
 });
 
-export default connect(mapStateToProps, { createMealPlan })(CreateMealPlan);
+export default connect(mapStateToProps, { createExercisePlan })(
+    CreateExercisePlan
+);

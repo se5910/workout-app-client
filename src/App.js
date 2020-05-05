@@ -1,31 +1,30 @@
 import React from "react";
+import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import SignUp from "./pages/SignUp";
-import MealPlans from "./pages/MealPlans";
-import "./App.css";
-import { Provider } from "react-redux";
+import Purchases from "./pages/Purchases";
+import ClientDetail from "./components/ClientDetail/ClientDetail";
+import Profile from "./components/profile-forms/Profile";
+import ExercisePlan from "./components/ExercisePlan";
+import MealPlan from "./components/MealPlan";
+import CreateExercisePlan from "./components/plans/CreateExercisePlan";
+import CreateMealPlan from "./components/plans/CreateMealPlan";
+import CreateTemplate from "./components/templates/CreateTemplate";
+import NotFound from "./pages/NotFound";
 
 import store from "./store";
 import SecureRoute from "./util/SecureRoute";
 import setJWTToken from "./util/setJWTToken";
-import jwt_decode from "jwt-decode";
+
+import { Provider } from "react-redux";
+
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/authActions";
-import ExercisePlans from "./pages/ExercisePlans";
-import Purchases from "./pages/Purchases";
-import ClientDetail from "./pages/ClientDetail/ClientDetail";
-import Profile from "./components/profile-forms/Profile";
-import ExercisePlan from "./pages/ExercisePlan";
-import MealPlan from "./pages/MealPlan";
-import CreateExercisePlan from "./pages/plans/CreateExercisePlan";
-import CreateMealPlan from "./pages/plans/CreateMealPlan";
-
-import NotFound from "./pages/NotFound";
-
 // Make sure the token is valid and persist
 function App() {
     console.log("checking");
@@ -67,12 +66,6 @@ function App() {
                             path="/dashboard"
                             component={Dashboard}
                         />
-                        <SecureRoute exact path="/meal" component={MealPlans} />
-                        <SecureRoute
-                            exact
-                            path="/exercise"
-                            component={ExercisePlans}
-                        />
                         <SecureRoute
                             exact
                             path="/purchases"
@@ -112,6 +105,11 @@ function App() {
                             exact
                             path="/client/:id/create-meal-plan"
                             component={CreateMealPlan}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/exercise-plan/:exerciseId/create-template"
+                            component={CreateTemplate}
                         />
                         <Route component={NotFound} />
                     </Switch>
