@@ -4,7 +4,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { getClient } from "../../actions/coachActions";
-import { getClientExercisePlans } from "../../actions/planActions";
+import {
+    getClientExercisePlans,
+    getClientMealPlans,
+} from "../../actions/planActions";
 import ExercisePlanCard from "./ExercisePlanCard";
 import MealPlanCard from "./MealPlanCard";
 import Paper from "@material-ui/core/Paper";
@@ -27,9 +30,10 @@ const useStyles = makeStyles({
 const ClientDetail = ({
     match,
     coach: { client, loading },
-    plans: { meal, exercise },
+    plans: { mealPlans, exercisePlans },
     getClient,
     getClientExercisePlans,
+    getClientMealPlans,
 }) => {
     const classes = useStyles();
     const { id } = match.params;
@@ -37,62 +41,26 @@ const ClientDetail = ({
     useEffect(() => {
         getClient(id);
         getClientExercisePlans(id);
+        getClientMealPlans(id);
     }, [getClient, id]);
 
     return (
         <Container>
             <ClientCard className={classes.marginBottom} client={client} />
-            {exercise && exercise.length !== 0 ? (
-                <ExercisePlanCard
-                    className={classes.marginBottom}
-                    plans={exercise}
-                    clientId={1}
-                />
-            ) : (
-                <Paper style={{ marginTop: "1.5rem" }}>
-                    <Container style={{ padding: "3rem" }}>
-                        <Typography>
-                            No Exericse plans have been created
-                        </Typography>
-                        <Button
-                            component={Link}
-                            to={
-                                client &&
-                                `/client/${client.id}/create-exercise-plan`
-                            }
-                            variant="contained"
-                            color="primary"
-                        >
-                            Create a plan
-                        </Button>
-                    </Container>
-                </Paper>
-            )}
 
-            {meal && meal.length !== 0 ? (
-                <MealPlanCard
-                    className={classes.marginBottom}
-                    plans={exercise}
-                    clientId={1}
-                />
-            ) : (
-                <Paper style={{ marginTop: "1.5rem" }}>
-                    <Container style={{ padding: "3rem" }}>
-                        <Typography>No Meal plans have been created</Typography>
-                        <Button
-                            component={Link}
-                            to={
-                                client &&
-                                `/client/${client.id}/create-meal-plan`
-                            }
-                            variant="contained"
-                            color="primary"
-                        >
-                            Create a plan
-                        </Button>
-                    </Container>
-                </Paper>
-            )}
+            <ExercisePlanCard
+                className={classes.marginBottom}
+                plans={exercisePlans}
+                clientId={id}
+                client={client && client.id}
+            />
+
+            <MealPlanCard
+                className={classes.marginBottom}
+                plans={mealPlans}
+                clientId={id}
+                client={client && client.id}
+            />
         </Container>
     );
 };
@@ -107,6 +75,8 @@ const mapStateToProps = (state) => ({
     plans: state.plans,
 });
 
-export default connect(mapStateToProps, { getClient, getClientExercisePlans })(
-    ClientDetail
-);
+export default connect(mapStateToProps, {
+    getClient,
+    getClientExercisePlans,
+    getClientMealPlans,
+})(ClientDetail);

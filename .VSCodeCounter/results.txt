@@ -1,0 +1,79 @@
+Date : 2020-05-04 16:42:24
+Directory : /Users/john/Code/WebProjects/se5910/workout-app-client/src
+Total : 44 files,  2527 codes, 50 comments, 296 blanks, all 2873 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         42 |      2,482 |         50 |        288 |      2,820 |
+| CSS        |          2 |         45 |          0 |          8 |         53 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                   |         44 |      2,527 |         50 |        296 |      2,873 |
+| actions                                                                                             |          5 |        263 |          6 |         26 |        295 |
+| components                                                                                          |          8 |        804 |          1 |         69 |        874 |
+| components/Dashboards                                                                               |          3 |        193 |          0 |         21 |        214 |
+| components/Layout                                                                                   |          4 |        381 |          1 |         32 |        414 |
+| components/profile-forms                                                                            |          1 |        230 |          0 |         16 |        246 |
+| pages                                                                                               |         15 |        974 |          2 |        126 |      1,102 |
+| pages/ClientDetail                                                                                  |          4 |        304 |          0 |         28 |        332 |
+| pages/plans                                                                                         |          2 |        166 |          0 |         24 |        190 |
+| reducers                                                                                            |          6 |        143 |          0 |         22 |        165 |
+| util                                                                                                |          2 |         41 |          0 |          8 |         49 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                            | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/App.css                                  | CSS        |         33 |          0 |          6 |         39 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/App.js                                   | JavaScript |        106 |          3 |         10 |        119 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/App.test.js                              | JavaScript |          8 |          0 |          2 |         10 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/actions/authActions.js                   | JavaScript |         80 |          6 |          6 |         92 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/actions/coachActions.js                  | JavaScript |         47 |          0 |          4 |         51 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/actions/planActions.js                   | JavaScript |         73 |          0 |          6 |         79 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/actions/profileActions.js                | JavaScript |         51 |          0 |          6 |         57 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/actions/types.js                         | JavaScript |         12 |          0 |          4 |         16 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/Dashboards/ClientDashboard.js | JavaScript |         65 |          0 |          6 |         71 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/Dashboards/ClientRow.js       | JavaScript |         39 |          0 |          4 |         43 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/Dashboards/CoachDashboard.js  | JavaScript |         89 |          0 |         11 |        100 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/Layout/Footer.js              | JavaScript |         42 |          0 |          5 |         47 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/Layout/NavBar.js              | JavaScript |        142 |          0 |          9 |        151 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/Layout/Spinner.js             | JavaScript |         22 |          0 |          3 |         25 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/Layout/index.js               | JavaScript |        175 |          1 |         15 |        191 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/components/profile-forms/Profile.js      | JavaScript |        230 |          0 |         16 |        246 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/index.css                                | CSS        |         12 |          0 |          2 |         14 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/index.js                                 | JavaScript |          8 |          3 |          3 |         14 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/ClientDetail/ClientCard.js         | JavaScript |         70 |          0 |          6 |         76 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/ClientDetail/ClientDetail.js       | JavaScript |        104 |          0 |          9 |        113 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/ClientDetail/ExercisePlanCard.js   | JavaScript |         41 |          0 |          7 |         48 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/ClientDetail/MealPlanCard.js       | JavaScript |         89 |          0 |          6 |         95 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/Dashboard.js                       | JavaScript |         25 |          0 |          6 |         31 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/ExercisePlan.js                    | JavaScript |          8 |          0 |          4 |         12 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/ExercisePlans.js                   | JavaScript |         32 |          0 |          9 |         41 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/Home.js                            | JavaScript |         80 |          0 |          7 |         87 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/Login.js                           | JavaScript |        123 |          1 |         15 |        139 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/MealPlans.js                       | JavaScript |         32 |          0 |          9 |         41 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/NotFound.js                        | JavaScript |         44 |          0 |          5 |         49 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/Purchases.js                       | JavaScript |         10 |          0 |          3 |         13 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/SignUp.js                          | JavaScript |        150 |          1 |         16 |        167 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/plans/CreateExercisePlan.js        | JavaScript |         83 |          0 |         12 |         95 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/pages/plans/CreateMealPlan.js            | JavaScript |         83 |          0 |         12 |         95 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/reducers/authReducer.js                  | JavaScript |         26 |          0 |          5 |         31 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/reducers/coachReducer.js                 | JavaScript |         31 |          0 |          4 |         35 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/reducers/errorReducer.js                 | JavaScript |         12 |          0 |          5 |         17 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/reducers/index.js                        | JavaScript |         13 |          0 |          1 |         14 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/reducers/planReducer.js                  | JavaScript |         30 |          0 |          3 |         33 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/reducers/profileReducer.js               | JavaScript |         31 |          0 |          4 |         35 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/serviceWorker.js                         | JavaScript |         94 |         31 |         13 |        138 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/setupTests.js                            | JavaScript |          1 |          4 |          1 |          6 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/store.js                                 | JavaScript |         40 |          0 |          8 |         48 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/util/SecureRoute.js                      | JavaScript |         32 |          0 |          5 |         37 |
+| /Users/john/Code/WebProjects/se5910/workout-app-client/src/util/setJWTToken.js                      | JavaScript |          9 |          0 |          3 |         12 |
+| Total                                                                                               |            |      2,527 |         50 |        296 |      2,873 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

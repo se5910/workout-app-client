@@ -37,7 +37,7 @@ export const getClient = (id) => async (dispatch) => {
 
 export const approveClient = (clientId) => async (dispatch) => {
     try {
-        const res = await axios.post(`api/coach/approve/${clientId}`);
+        const res = await axios.post(`api/coach/approve/client/${clientId}`);
         dispatch(getClients());
     } catch (err) {
         if (err.response && err.response.data) {
