@@ -6,7 +6,12 @@ import WeekCard from "./WeekCard";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { createWeek } from "../../actions/planActions";
+import Select from "@material-ui/core/Select";
+import { FormControl, MenuItem } from "@material-ui/core";
 import { connect } from "react-redux";
+
+import bench1 from "../../images/bench1.jpg";
+import bench2 from "../../images/bench2.jpg";
 
 import PropTypes from "prop-types";
 import { Typography, TextField } from "@material-ui/core";
@@ -20,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
         width: 151,
         marginBottom: "1rem",
         marginLeft: ".5rem",
+        marginRight: "1rem",
     },
     marginLeft: {
         marginLeft: ".5rem",
@@ -29,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
     img: {
         height: "auto",
-        width: "20%",
+        width: "40%",
     },
 }));
 
@@ -51,16 +57,8 @@ const ExerciseSlot = ({
                             Exercise:{" "}
                         </Typography>
                         <div className={classes.marginLeft}>
-                            <img
-                                className={classes.img}
-                                src="http://www.fillmurray.com/250/200"
-                                alt=""
-                            />
-                            <img
-                                className={classes.img}
-                                src="http://www.fillmurray.com/250/200"
-                                alt=""
-                            />
+                            <img className={classes.img} src={bench1} alt="" />
+                            <img className={classes.img} src={bench2} alt="" />
                         </div>
                         <Button
                             className={classes.button}
@@ -77,6 +75,13 @@ const ExerciseSlot = ({
                         >
                             Create a Week
                         </Button>
+                        <FormControl>
+                            <Select>
+                                <MenuItem value={1}>OverHead Press</MenuItem>
+                                <MenuItem value={2}>deadLift</MenuItem>
+                                <MenuItem value={3}>OverHead Press</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
 
                     <Grid item xs={6} spacing={3}>
@@ -85,7 +90,10 @@ const ExerciseSlot = ({
                                 slot.weeks.map((week) => {
                                     return (
                                         <Grid item lg={6}>
-                                            <WeekCard week={week} />
+                                            <WeekCard
+                                                className={classes.card}
+                                                week={week}
+                                            />
                                         </Grid>
                                     );
                                 })}
