@@ -47,56 +47,22 @@ const ClientDetail = ({
     return (
         <Container>
             <ClientCard className={classes.marginBottom} client={client} />
-            {exercise && exercise.length !== 0 ? (
+            {exercise && (
                 <ExercisePlanCard
                     className={classes.marginBottom}
                     plans={exercise}
                     clientId={id}
+                    client={client}
                 />
-            ) : (
-                <Paper style={{ marginTop: "1.5rem" }}>
-                    <Container style={{ padding: "3rem" }}>
-                        <Typography>
-                            No Exercise plans have been created
-                        </Typography>
-                        <Button
-                            component={Link}
-                            to={
-                                client &&
-                                `/client/${client.id}/create-exercise-plan`
-                            }
-                            variant="contained"
-                            color="primary"
-                        >
-                            Create a plan
-                        </Button>
-                    </Container>
-                </Paper>
             )}
 
-            {meal && meal.length !== 0 ? (
+            {meal && (
                 <MealPlanCard
                     className={classes.marginBottom}
                     plans={meal}
                     clientId={id}
+                    client={client}
                 />
-            ) : (
-                <Paper style={{ marginTop: "1.5rem" }}>
-                    <Container style={{ padding: "3rem" }}>
-                        <Typography>No Meal plans have been created</Typography>
-                        <Button
-                            component={Link}
-                            to={
-                                client &&
-                                `/client/${client.id}/create-meal-plan`
-                            }
-                            variant="contained"
-                            color="primary"
-                        >
-                            Create a plan
-                        </Button>
-                    </Container>
-                </Paper>
             )}
         </Container>
     );
