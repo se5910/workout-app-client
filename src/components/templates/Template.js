@@ -1,141 +1,102 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import TextField from "@material-ui/core/TextField";
-import { Paper, Container } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import React, { useEffect, useState, useCallback } from "react";
+import Paper from "@material-ui/core/Paper";
+import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { getTemplate, createTemplate } from "../../actions/planActions";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import ExerciseSlot from "../exerciseSlot/ExerciseSlot";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { getTemplate, createExerciseSlot } from "../../actions/planActions";
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
+const useStyles = makeStyles({
+    content: {
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-        padding: "2rem",
     },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+    templates: {
+        marginTop: "2rem",
     },
-    form: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+    button: {
+        marginBottom: "2rem",
+        marginTop: "2rem",
     },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
+});
 
-const initialState = {
-    id: "",
-    name: "",
-    workoutType: "",
-    phase: "",
-};
-
-const Template = ({
-    match,
-    getTemplate,
-    createTemplate,
-    template: { template, loading },
-    history,
-}) => {
+const Template = ({ getTemplate, template, match, createExerciseSlot }) => {
     const { id, exerciseId, templateId } = match.params;
 
     const classes = useStyles();
 
-    const [formData, setFormData] = useState(initialState);
-
+    // Trigger a rerender
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
+    console.log("render");
     useEffect(() => {
         getTemplate(id, exerciseId, templateId);
-        if (!loading && template) {
-            const profileData = { ...initialState };
-            for (const key in template) {
-                if (key in template) profileData[key] = template[key];
-            }
-            setFormData(profileData);
-        }
-    }, [loading, getTemplate, setFormData]);
-
-    const { name, workoutType, phase } = formData;
-
-    const onChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        createTemplate(id, exerciseId, formData, history);
-    };
-
+    }, []);
     return (
-        <Container component="main" maxWidth="md">
-            <Paper className={classes.paper} elevation={3}>
-                <Typography component="h1" variant="h5">
-                    Edit Template
+        <Paper style={{ height: "100%" }}>
+            <Container>
+                {template && (
+                    <Typography variant="h2">
+                        Template: {template.name}
+                    </Typography>
+                )}
+                <hr />
+                <Typography variant="h5" className={classes.templates}>
+                    Exercise Slots
                 </Typography>
-                <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        id="name"
-                        label="Template Name"
-                        name="name"
-                        value={name}
-                        autoFocus
-                        onChange={(e) => onChange(e)}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        id="workoutType"
-                        label="Workout Type"
-                        name="workoutType"
-                        value={workoutType}
-                        autoFocus
-                        onChange={(e) => onChange(e)}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        id="phase"
-                        label="Phase"
-                        name="phase"
-                        value={phase}
-                        autoFocus
-                        onChange={(e) => onChange(e)}
-                    />
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Submit
-                    </Button>
-                </form>
-            </Paper>
-        </Container>
+                <hr />
+                {template && template.exerciseSlots.length < 0 && (
+                    <p>There are no templates in this plan</p>
+                )}
+                <Container>
+                    <Grid container spacing={3}>
+                        {template &&
+                            template.exerciseSlots.map((slot) => (
+                                <Grid item md={12}>
+                                    <ExerciseSlot
+                                        clientId={id}
+                                        slotId={slot.id}
+                                        exerciseId={exerciseId}
+                                        templateId={templateId}
+                                        slot={slot}
+                                    />
+                                </Grid>
+                            ))}
+                    </Grid>
+                </Container>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                        createExerciseSlot(id, exerciseId, templateId);
+                        getTemplate(id, exerciseId, templateId);
+                        forceUpdate();
+                    }}
+                >
+                    Create An Exercise Slot
+                </Button>
+            </Container>
+        </Paper>
     );
 };
 
 Template.propTypes = {
-    getTemplate: PropTypes.func.isRequired,
     template: PropTypes.object.isRequired,
+    getTemplate: PropTypes.func.isRequired,
+    createExerciseSlot: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-    template: state.plans,
+    template: state.plans.template,
 });
 
-export default connect(mapStateToProps, { getTemplate, createTemplate })(
+export default connect(mapStateToProps, { getTemplate, createExerciseSlot })(
     Template
 );

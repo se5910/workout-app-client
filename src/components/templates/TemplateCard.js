@@ -24,35 +24,33 @@ const TemplateCard = ({ template, clientId, planId }) => {
     const classes = useStyles();
     return (
         <Card className={classes.root}>
-            <CardActionArea>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Name: {template && template.name}
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Workout Type: {template && template.workoutType}
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Phase: {template && template.phase}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                    Name: {template && template.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    Workout Type: {template && template.workoutType}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    Phase: {template && template.phase}
+                </Typography>
+            </CardContent>
             <CardActions>
+                <Button
+                    component={Link}
+                    to={`/client/${clientId}/exercise-plan/${planId}/template/${template.id}/update`}
+                    size="small"
+                    color="primary"
+                >
+                    Edit Template
+                </Button>
                 <Button
                     component={Link}
                     to={`/client/${clientId}/exercise-plan/${planId}/template/${template.id}`}
                     size="small"
                     color="primary"
                 >
-                    Edit Template
+                    View Template
                 </Button>
             </CardActions>
         </Card>

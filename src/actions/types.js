@@ -18,3 +18,4 @@ export const GET_CLIENTS = "GET_CLIENTS";
 export const GET_CLIENT = "GET_CLIENT";
 
 export const GET_TEMPLATE = "GET_TEMPLATE";
+export const CREATE_SLOT = "CREATE_SLOT";

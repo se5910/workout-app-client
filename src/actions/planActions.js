@@ -6,6 +6,7 @@ import {
     CLIENT_MEAL_PLANS,
     GET_ERRORS,
     GET_TEMPLATE,
+    CREATE_SLOT,
 } from "./types";
 import axios from "axios";
 
@@ -135,6 +136,45 @@ export const getTemplate = (clientId, planId, templateId) => async (
             type: GET_TEMPLATE,
             payload: res.data,
         });
+    } catch (err) {
+        if (err && err.response) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            });
+        }
+    }
+};
+
+export const createExerciseSlot = (clientId, planId, templateId) => async (
+    dispatch
+) => {
+    try {
+        const res = await axios.post(
+            `/api/client/${clientId}/exercisePlan/${planId}/template/${templateId}/exerciseSlot`,
+            {}
+        );
+        dispatch({
+            type: CREATE_SLOT,
+            payload: res.data,
+        });
+        dispatch({
+            GET_TEMPLATE,
+        });
+    } catch (error) {}
+};
+
+export const createWeek = (
+    clientId,
+    planId,
+    templateId,
+    exerciseSlotId
+) => async (dispatch) => {
+    try {
+        await axios.post(
+            `/api/client/${clientId}/exercisePlan/${planId}/template/${templateId}/exerciseSlot/${exerciseSlotId}/week`,
+            { name: 0 }
+        );
     } catch (err) {
         if (err && err.response) {
             dispatch({
