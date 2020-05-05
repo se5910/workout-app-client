@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -26,6 +29,7 @@ const initialState = {
     restingHeartRate: "",
     goalStatement: "",
     healthHistory: "",
+    coach: "",
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +89,7 @@ const CreateProfile = ({
         restingHeartRate,
         goalStatement,
         healthHistory,
+        coach,
     } = formData;
 
     const classes = useStyles();
@@ -211,7 +216,23 @@ const CreateProfile = ({
                         error={errors.healthHistory}
                         helperText={errors.healthHistory}
                     />
-
+                    <InputLabel id="coach-label">Coach</InputLabel>
+                    <Select
+                        variant="outlined"
+                        fullWidth
+                        name="coach"
+                        label-id="coach"
+                        id="coach"
+                        value={coach}
+                        onChange={(e) => onChange(e)}
+                        error={errors.coach}
+                        helperText={errors.coach}
+                    >
+                        <MenuItem value="Shae">Shayne</MenuItem>
+                        <MenuItem value="josh@hype4fitness.com">Josh</MenuItem>
+                        <MenuItem value="Glynn">Glynn</MenuItem>
+                        <MenuItem value="John">John</MenuItem>
+                    </Select>
                     <Button
                         type="submit"
                         fullWidth

@@ -1,26 +1,31 @@
 import React from "react";
+import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import SignUp from "./pages/SignUp";
-import MealPlans from "./pages/MealPlans";
-import "./App.css";
-import { Provider } from "react-redux";
+import Purchases from "./pages/Purchases";
+import ClientDetail from "./components/ClientDetail/ClientDetail";
+import Profile from "./components/profile-forms/Profile";
+import ExercisePlan from "./components/ExercisePlan";
+import CreateExercisePlan from "./components/plans/CreateExercisePlan";
+import CreateTemplate from "./components/templates/CreateTemplate";
+import UpdateTemplate from "./components/templates/UpdateTemplate";
+import Template from "./components/templates/Template";
+import NotFound from "./pages/NotFound";
 
 import store from "./store";
 import SecureRoute from "./util/SecureRoute";
 import setJWTToken from "./util/setJWTToken";
-import jwt_decode from "jwt-decode";
+
+import { Provider } from "react-redux";
+
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/authActions";
-import ExercisePlans from "./pages/ExercisePlans";
-import Purchases from "./pages/Purchases";
-import Clients from "./pages/Clients";
-import Profile from "./components/profile-forms/Profile";
-import NotFound from "./pages/NotFound";
-
+// Make sure the token is valid and persist
 function App() {
     console.log("checking");
     const jwtToken = localStorage.jwtToken;
@@ -61,21 +66,10 @@ function App() {
                             path="/dashboard"
                             component={Dashboard}
                         />
-                        <SecureRoute exact path="/meal" component={MealPlans} />
-                        <SecureRoute
-                            exact
-                            path="/exercise"
-                            component={ExercisePlans}
-                        />
                         <SecureRoute
                             exact
                             path="/purchases"
                             component={Purchases}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/clients"
-                            component={Clients}
                         />
                         <SecureRoute
                             exact
@@ -87,6 +81,38 @@ function App() {
                             path="/update-profile"
                             component={Profile}
                         />
+                        <SecureRoute
+                            exact
+                            path="/client/:id"
+                            component={ClientDetail}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/exercise-plan/:planId"
+                            component={ExercisePlan}
+                        />
+
+                        <SecureRoute
+                            exact
+                            path="/client/:id/create-exercise-plan"
+                            component={CreateExercisePlan}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/exercise-plan/:exerciseId/create-template"
+                            component={CreateTemplate}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/exercise-plan/:exerciseId/template/:templateId/update"
+                            component={UpdateTemplate}
+                        />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/exercise-plan/:exerciseId/template/:templateId"
+                            component={Template}
+                        />
+
                         <Route component={NotFound} />
                     </Switch>
                 </Layout>

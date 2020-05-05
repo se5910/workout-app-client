@@ -1,9 +1,13 @@
 import React, { Fragment, useEffect } from "react";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCurrentProfile } from "../../actions/profileActions";
+import { getCurrentProfile } from "../../../actions/profileActions";
+import ClientExercisePlans from "./ClientExercisePlans";
 
 const ClientDashboard = ({
     auth: { user },
@@ -17,11 +21,12 @@ const ClientDashboard = ({
     return (
         <Fragment>
             <h1 className="large text-primary">Dashboard</h1>
-            <p>
-                <i className="fas fa-user"> Welcome {user && user.fullName}</i>
-            </p>
-            {profile !== null ? (
+            <p>Welcome {user && user.fullName}</p>
+            {profile !== null && profile.approved === false ? (
                 <Fragment>
+                    <Typography variant="h5">
+                        Please wait for approval
+                    </Typography>
                     <Button
                         component={Link}
                         to="/update-profile"
@@ -31,6 +36,12 @@ const ClientDashboard = ({
                         Edit Profile
                     </Button>
                 </Fragment>
+            ) : profile && profile.approved ? (
+                <Grid container spacing={3}>
+                    <Grid item lg={6} sm={12}>
+                        <ClientExercisePlans />
+                    </Grid>
+                </Grid>
             ) : (
                 <Fragment>
                     <p>
@@ -59,6 +70,9 @@ ClientDashboard.propTypes = {
 const mapStateToProps = (state) => ({
     auth: state.auth,
     profile: state.profile,
+    plans: state.plans,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(ClientDashboard);
+export default connect(mapStateToProps, {
+    getCurrentProfile,
+})(ClientDashboard);

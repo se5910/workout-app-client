@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CoachDashboard from "../components/Dashboards/CoachDashboard";
-import ClientDashboard from "../components/Dashboards/ClientDashboard";
+import ClientDashboard from "../components/Dashboards/ClientDashboard/ClientDashboard";
 import { verifyCoach } from "../actions/authActions";
 
 const Dashboard = ({ auth: { user }, coach: { coach }, verifyCoach }) => {

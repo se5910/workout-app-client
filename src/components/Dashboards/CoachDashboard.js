@@ -8,12 +8,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { verifyCoach, logout } from "../../actions/authActions";
 import { getClients } from "../../actions/coachActions";
-import { ClientRow } from "./ClientRow";
+import ClientRow from "./ClientRow";
 
 const useStyles = makeStyles({
     table: {
@@ -53,7 +54,10 @@ const CoachDashboard = ({
     }
 
     return (
-        <Grid item xs={12}>
+        <Paper component={Grid} item xs={12}>
+            <Typography variant="h4" style={{ textAlign: "center" }}>
+                Clients
+            </Typography>
             <TableContainer component={Paper}>
                 <Table
                     className={classes.table}
@@ -74,7 +78,7 @@ const CoachDashboard = ({
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Grid>
+        </Paper>
     );
 };
 
