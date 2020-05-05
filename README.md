@@ -20,7 +20,7 @@ brew install node
 
 ### Installing
 
-The first step to run this frontend is to make sure you are in the root directory, and that you can see a package.json file.
+The first step to run this frontend is to make sure you are in the root directory of the project, and that you can see a package.json file.
 
 If you have nodejs installed you will run:
 
