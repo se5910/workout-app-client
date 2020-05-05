@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import { List, ListItem } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -20,10 +21,7 @@ const useStyles = makeStyles({
     item: {
         marginBottom: 12,
     },
-    content: {
-        display: "flex",
-        flexDirection: "column",
-    },
+
     button: {
         marginTop: "1rem",
     },
@@ -40,19 +38,23 @@ const MealPlanCard = ({ client, clientId, plans }) => {
 
     return (
         <Card className={classes.root}>
-            <CardContent className={classes.content}>
-                {plans
-                    ? plans.map((plan) => (
-                          <Typography
-                              variant="h5"
-                              key={plan.id}
-                              component={Link}
-                              to={`/client/${clientId}/meal-plan/${plan.planId}`}
-                          >
-                              {plan.name}
-                          </Typography>
-                      ))
-                    : noPlans}
+            <CardContent>
+                <List>
+                    {plans
+                        ? plans.map((plan) => (
+                              <ListItem>
+                                  <Typography
+                                      variant="h5"
+                                      key={plan.id}
+                                      component={Link}
+                                      to={`/client/${clientId}/meal-plan/${plan.planId}`}
+                                  >
+                                      {plan.name}
+                                  </Typography>
+                              </ListItem>
+                          ))
+                        : noPlans}
+                </List>
                 <Button
                     component={Link}
                     to={client && `/client/${client.id}/create-meal-plan`}
