@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getExercisePlanById } from "../actions/planActions";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const ExercisePlan = ({ match }) => {
-    const { id } = match.params;
-    console.log(match.params);
-    return <div>Plan number {id}</div>;
+const ExercisePlan = ({
+    match,
+    getExercisePlanById,
+    plans: { exercisePlan },
+}) => {
+    const { id, planId } = match.params;
+
+    useEffect(() => {
+        getExercisePlanById(id, planId);
+    }, []);
+
+    return <div>{exercisePlan && exercisePlan.name}</div>;
 };
 
 ExercisePlan.propTypes = {};
 
-export default ExercisePlan;
+const mapStateToProps = (state) => ({
+    plans: state.plans,
+});
+
+export default connect(mapStateToProps, { getExercisePlanById })(ExercisePlan);

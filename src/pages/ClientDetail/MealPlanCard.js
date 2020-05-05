@@ -52,7 +52,7 @@ const MealPlanCard = ({ client, clientId, plans }) => {
                               {plan.name}
                           </Typography>
                       ))
-                    : { noPlans }}
+                    : noPlans}
                 <Button
                     component={Link}
                     to={client && `/client/${client.id}/create-meal-plan`}

@@ -1,13 +1,17 @@
 import {
     GET_MEAL_PLANS,
+    GET_MEAL_PLAN,
     GET_EXERCISE_PLANS,
+    GET_EXERCISE_PLAN,
     CLIENT_EXERCISE_PLANS,
     CLIENT_MEAL_PLANS,
 } from "../actions/types";
 
 const initialState = {
-    meal: null,
-    exercise: null,
+    mealPlans: null,
+    mealPlan: null,
+    exercisePlans: null,
+    exercisePlan: null,
 };
 
 export default function (state = initialState, action) {
@@ -20,17 +24,27 @@ export default function (state = initialState, action) {
         case GET_EXERCISE_PLANS:
             return {
                 ...state,
-                exercise: action.payload,
+                exerciseplans: action.payload,
             };
         case CLIENT_EXERCISE_PLANS:
             return {
                 ...state,
-                exercise: action.payload,
+                exercisePlans: action.payload,
+            };
+        case GET_EXERCISE_PLAN:
+            return {
+                ...state,
+                exercisePlan: action.payload,
             };
         case CLIENT_MEAL_PLANS:
             return {
                 ...state,
-                meal: action.payload,
+                mealPlans: action.payload,
+            };
+        case GET_MEAL_PLAN:
+            return {
+                ...state,
+                mealPlan: action.payload,
             };
         default:
             return state;

@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 const ClientDetail = ({
     match,
     coach: { client, loading },
-    plans: { meal, exercise },
+    plans: { mealPlans, exercisePlans },
     getClient,
     getClientExercisePlans,
     getClientMealPlans,
@@ -47,23 +47,20 @@ const ClientDetail = ({
     return (
         <Container>
             <ClientCard className={classes.marginBottom} client={client} />
-            {exercise && (
-                <ExercisePlanCard
-                    className={classes.marginBottom}
-                    plans={exercise}
-                    clientId={id}
-                    client={client}
-                />
-            )}
 
-            {meal && (
-                <MealPlanCard
-                    className={classes.marginBottom}
-                    plans={meal}
-                    clientId={id}
-                    client={client}
-                />
-            )}
+            <ExercisePlanCard
+                className={classes.marginBottom}
+                plans={exercisePlans}
+                clientId={id}
+                client={client && client.id}
+            />
+
+            <MealPlanCard
+                className={classes.marginBottom}
+                plans={mealPlans}
+                clientId={id}
+                client={client && client.id}
+            />
         </Container>
     );
 };

@@ -51,7 +51,7 @@ const ExercisePlanCard = ({ plans, clientId, client }) => {
                               {plan.name}
                           </Typography>
                       ))
-                    : { noPlans }}
+                    : noPlans}
                 <Button
                     component={Link}
                     to={client && `/client/${client.id}/create-exercise-plan`}
