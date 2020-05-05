@@ -1,6 +1,6 @@
 # Workout-app-client
 
-The front end for a work out app being developed for a Software Engineering class
+The front end fora work out app being developed for a Software Engineering class
 
 ## Getting Started
 
@@ -8,68 +8,54 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+To run this project, Nodejs must be installed. The easiest way to install Node is through an official binary off of the nodejs website.
 
-```
-Give examples
+[nodejs.org](https://nodejs.org/en/)
+
+If you are using MacOS, homebrew, a package manager for OSX is an easy way to install Nodel
+
+```sh
+brew install node
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+The first step to run this frontend is to make sure you are in the root directory, and that you can see a package.json file.
 
-Say what the step will be
+If you have nodejs installed you will run:
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+```sh
+npm install
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Which will download all of packages and dependencies
 
-## Running the tests
+The next step is to make sure that the backend is running. The frontend will still work but none the functionality will be available.
 
-Explain how to run the automated tests for this system
+After the packages and dependencies have been downloaded, you should now have a node_modules folder.
 
-### Break down into end to end tests
+The last step is to run:
 
-Explain what these tests test and why
-
-```
-Give an example
+```sh
+npm start
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+This will start the react development server and should open a new tab in a web browser that displays the site.
 
 ## Built With
 
-* [React](https://reactjs.org/) - The web framework used
-* [Redux](https://redux.js.org/) - State management
-* [Material-Ui](https://material-ui.com/) - Style framework
+-   [React](https://reactjs.org/) - The web framework used
+-   [Redux](https://redux.js.org/) - State management
+-   [Redux Thunk](https://github.com/reduxjs/redux-thunk) - Asynchronous Redux Action Dispatch
+-   [Material-Ui](https://material-ui.com/) - Style framework
 
 ## Authors
 
-* **Glynn Leininger** - [glynn29](https://github.com/glynn29)
+-   **Glynn Leininger** - [glynn29](https://github.com/glynn29)
 
-* **Josh Haunty** -  [sharkguy95](https://github.com/sharkguy95)
+-   **Josh Haunty** - [sharkguy95](https://github.com/sharkguy95)
 
-* **John Irle**  - [JohnIrle](https://github.com/JohnIrle)
-
+-   **John Irle** - [JohnIrle](https://github.com/JohnIrle)
 
 ## License
 
