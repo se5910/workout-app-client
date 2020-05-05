@@ -2,19 +2,45 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import { Paper, Container } from "@material-ui/core";
-import 
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { getTemplate, createTemplate } from "../../actions/planActions";
 import { connect } from "react-redux";
 
-const Template = ({ match, getTemplate, template, history }) => {
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "2rem",
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+
+const initialState = {
+    name: "",
+    workoutType: "",
+    phase: "",
+};
+
+const Template = ({ match, getTemplate, template: { template }, history }) => {
     const { id, exerciseId, templateId } = match.params;
 
-    const [formData, setFormData] = useState({
-        name: (template && template.id) || "",
-        workoutType: (template && template.workoutType) || "",
-        phase: (template && template.phase) || "",
-    });
+    const classes = useStyles();
+
+    const [formData, setFormData] = useState(initialState);
 
     useEffect(() => {
         getTemplate(id, exerciseId, templateId);
@@ -33,10 +59,9 @@ const Template = ({ match, getTemplate, template, history }) => {
 
     return (
         <Container component="main" maxWidth="md">
-            <CssBaseline />
             <Paper className={classes.paper} elevation={3}>
                 <Typography component="h1" variant="h5">
-                    Create Template
+                    Edit Template
                 </Typography>
                 <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
                     <TextField
@@ -80,7 +105,7 @@ const Template = ({ match, getTemplate, template, history }) => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign Up
+                        Submit
                     </Button>
                 </form>
             </Paper>
@@ -94,7 +119,7 @@ Template.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    template: state.plans.template,
+    template: state.plans,
 });
 
 export default connect(mapStateToProps, { getTemplate })(Template);
