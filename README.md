@@ -1,6 +1,6 @@
 # Workout-app-client
 
-The front end for a work out app being developed for a Software Engineering class
+The front end fora work out app being developed for a Software Engineering class
 
 ## Getting Started
 
