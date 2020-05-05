@@ -14,6 +14,7 @@ const initialState = {
     exercisePlans: null,
     exercisePlan: null,
     template: null,
+    loading: true,
 };
 
 export default function (state = initialState, action) {
@@ -52,6 +53,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 template: action.payload,
+                loading: false,
             };
         default:
             return state;

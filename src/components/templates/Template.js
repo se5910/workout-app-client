@@ -30,12 +30,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialState = {
+    id: "",
     name: "",
     workoutType: "",
     phase: "",
 };
 
-const Template = ({ match, getTemplate, template: { template }, history }) => {
+const Template = ({
+    match,
+    getTemplate,
+    createTemplate,
+    template: { template, loading },
+    history,
+}) => {
     const { id, exerciseId, templateId } = match.params;
 
     const classes = useStyles();
@@ -44,7 +51,14 @@ const Template = ({ match, getTemplate, template: { template }, history }) => {
 
     useEffect(() => {
         getTemplate(id, exerciseId, templateId);
-    }, []);
+        if (!loading && template) {
+            const profileData = { ...initialState };
+            for (const key in template) {
+                if (key in template) profileData[key] = template[key];
+            }
+            setFormData(profileData);
+        }
+    }, [loading, getTemplate, setFormData]);
 
     const { name, workoutType, phase } = formData;
 
@@ -122,4 +136,6 @@ const mapStateToProps = (state) => ({
     template: state.plans,
 });
 
-export default connect(mapStateToProps, { getTemplate })(Template);
+export default connect(mapStateToProps, { getTemplate, createTemplate })(
+    Template
+);
