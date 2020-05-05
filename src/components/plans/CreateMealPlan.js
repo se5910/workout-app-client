@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CreateMealPlan = ({ errors, client, createMealPlan }) => {
+const CreateMealPlan = ({ errors, client, createMealPlan, history }) => {
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
@@ -47,7 +47,7 @@ const CreateMealPlan = ({ errors, client, createMealPlan }) => {
     const onSubmit = (e) => {
         e.preventDefault();
         console.log("submitted");
-        createMealPlan(client.id, formData);
+        createMealPlan(client.id, formData, history);
     };
 
     return (

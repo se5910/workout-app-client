@@ -31,7 +31,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
+const CreateExercisePlan = ({
+    errors,
+    createExercisePlan,
+    client,
+    history,
+}) => {
     const classes = useStyles();
 
     const [formData, setFormData] = useState({
@@ -46,7 +51,7 @@ const CreateExercisePlan = ({ errors, createExercisePlan, client }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        createExercisePlan(client.id, formData);
+        createExercisePlan(client.id, formData, history);
     };
 
     return (
