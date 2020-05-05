@@ -5,6 +5,7 @@ import {
     CLIENT_EXERCISE_PLANS,
     CLIENT_MEAL_PLANS,
     GET_ERRORS,
+    GET_TEMPLATE,
 } from "./types";
 import axios from "axios";
 
@@ -92,6 +93,46 @@ export const getExercisePlanById = (clientId, planId) => async (dispatch) => {
 
         dispatch({
             type: GET_EXERCISE_PLAN,
+            payload: res.data,
+        });
+    } catch (err) {
+        if (err && err.response) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            });
+        }
+    }
+};
+
+export const createTemplate = (clientId, planId, formData, history) => async (
+    dispatch
+) => {
+    try {
+        await axios.post(
+            `/api/client/${clientId}/exercisePlan/${planId}/template`,
+            formData
+        );
+        history.push(`/client/${clientId}/exercise-plan/${planId}`);
+    } catch (err) {
+        if (err && err.response) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            });
+        }
+    }
+};
+
+export const getTemplate = (clientId, planId, templateId) => async (
+    dispatch
+) => {
+    try {
+        const res = await axios.get(
+            `/api/client/${clientId}/exercisePlan/${planId}/template/${templateId}`
+        );
+        dispatch({
+            type: GET_TEMPLATE,
             payload: res.data,
         });
     } catch (err) {

@@ -42,7 +42,7 @@ const ClientDetail = ({
         getClient(id);
         getClientExercisePlans(id);
         getClientMealPlans(id);
-    }, [getClient, id]);
+    }, []);
 
     return (
         <Container>

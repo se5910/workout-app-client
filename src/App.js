@@ -15,6 +15,7 @@ import MealPlan from "./components/MealPlan";
 import CreateExercisePlan from "./components/plans/CreateExercisePlan";
 import CreateMealPlan from "./components/plans/CreateMealPlan";
 import CreateTemplate from "./components/templates/CreateTemplate";
+import Template from "./components/templates/Template";
 import NotFound from "./pages/NotFound";
 
 import store from "./store";
@@ -111,6 +112,12 @@ function App() {
                             path="/client/:id/exercise-plan/:exerciseId/create-template"
                             component={CreateTemplate}
                         />
+                        <SecureRoute
+                            exact
+                            path="/client/:id/exercise-plan/:exerciseId/template/:templateId"
+                            component={Template}
+                        />
+
                         <Route component={NotFound} />
                     </Switch>
                 </Layout>

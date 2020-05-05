@@ -1,47 +1,24 @@
-import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-
-import { connect } from "react-redux";
-import { Paper } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { createTemplate } from "../../actions/planActions";
+import TextField from "@material-ui/core/TextField";
+import { Paper, Container } from "@material-ui/core";
+import 
+import Typography from "@material-ui/core/Typography";
+import { getTemplate, createTemplate } from "../../actions/planActions";
+import { connect } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "2rem",
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
-
-const Template = ({ history, createTemplate, match }) => {
-    const classes = useStyles();
-
-    const { id, exerciseId } = match.params;
+const Template = ({ match, getTemplate, template, history }) => {
+    const { id, exerciseId, templateId } = match.params;
 
     const [formData, setFormData] = useState({
-        name: "",
-        workoutType: "",
-        phase: "",
+        name: (template && template.id) || "",
+        workoutType: (template && template.workoutType) || "",
+        phase: (template && template.phase) || "",
     });
+
+    useEffect(() => {
+        getTemplate(id, exerciseId, templateId);
+    }, []);
 
     const { name, workoutType, phase } = formData;
 
@@ -112,7 +89,12 @@ const Template = ({ history, createTemplate, match }) => {
 };
 
 Template.propTypes = {
-    createTemplate: PropTypes.func.isRequired,
+    getTemplate: PropTypes.func.isRequired,
+    template: PropTypes.object.isRequired,
 };
 
-export default connect(null, { createTemplate })(Template);
+const mapStateToProps = (state) => ({
+    template: state.plans.template,
+});
+
+export default connect(mapStateToProps, { getTemplate })(Template);
