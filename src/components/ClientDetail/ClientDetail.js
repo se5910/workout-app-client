@@ -4,16 +4,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { getClient } from "../../actions/coachActions";
-import {
-    getClientExercisePlans,
-    getClientMealPlans,
-} from "../../actions/planActions";
+import { getClientExercisePlans } from "../../actions/planActions";
 import ExercisePlanCard from "./ExercisePlanCard";
-import MealPlanCard from "./MealPlanCard";
-import Paper from "@material-ui/core/Paper";
-import { Container, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles({
     root: {
@@ -41,8 +34,7 @@ const ClientDetail = ({
     useEffect(() => {
         getClient(id);
         getClientExercisePlans(id);
-        getClientMealPlans(id);
-    }, []);
+    }, [getClient, getClientExercisePlans, id]);
 
     return (
         <Container>
@@ -51,13 +43,6 @@ const ClientDetail = ({
             <ExercisePlanCard
                 className={classes.marginBottom}
                 plans={exercisePlans}
-                clientId={id}
-                client={client && client.id}
-            />
-
-            <MealPlanCard
-                className={classes.marginBottom}
-                plans={mealPlans}
                 clientId={id}
                 client={client && client.id}
             />
@@ -78,5 +63,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
     getClient,
     getClientExercisePlans,
-    getClientMealPlans,
 })(ClientDetail);

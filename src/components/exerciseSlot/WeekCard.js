@@ -87,6 +87,8 @@ const WeekCard = ({ week }) => {
     );
 };
 
-WeekCard.propTypes = {};
+WeekCard.propTypes = {
+    week: PropTypes.object.isRequired,
+};
 
 export default WeekCard;

@@ -28,6 +28,7 @@ const ExercisePlan = ({
     match,
     getExercisePlanById,
     plans: { exercisePlan },
+    coach,
 }) => {
     const classes = useStyles();
 
@@ -37,7 +38,7 @@ const ExercisePlan = ({
 
     useEffect(() => {
         getExercisePlanById(id, planId);
-    }, [id, planId]);
+    }, [id, planId, getExercisePlanById]);
 
     return (
         <Paper style={{ height: "100%" }}>
@@ -51,15 +52,17 @@ const ExercisePlan = ({
                 <Typography variant="h5" className={classes.templates}>
                     Templates
                 </Typography>
-                <Button
-                    className={classes.container}
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to={`/client/${id}/exercise-plan/${planId}/create-template`}
-                >
-                    Create A Template
-                </Button>
+                {coach.coach && (
+                    <Button
+                        className={classes.container}
+                        variant="contained"
+                        color="primary"
+                        component={Link}
+                        to={`/client/${id}/exercise-plan/${planId}/create-template`}
+                    >
+                        Create A Template
+                    </Button>
+                )}
                 <hr />
                 {exercisePlan && exercisePlan.templates.length < 0 && (
                     <p>There are no templates in this plan</p>
@@ -83,10 +86,16 @@ const ExercisePlan = ({
     );
 };
 
-ExercisePlan.propTypes = {};
+ExercisePlan.propTypes = {
+    match: PropTypes.object.isRequired,
+    getExercisePlanById: PropTypes.func.isRequired,
+    plans: PropTypes.func.isRequired,
+    coach: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
     plans: state.plans,
+    coach: state.coach,
 });
 
 export default connect(mapStateToProps, { getExercisePlanById })(ExercisePlan);

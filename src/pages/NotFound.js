@@ -2,7 +2,6 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import BlockIcon from "@material-ui/icons/Block";
 import Shayne from "../images/2020-05-04.jpg";
 
 const useStyles = makeStyles((theme) => ({

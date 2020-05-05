@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ExerciseSlot from "../exerciseSlot/ExerciseSlot";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getTemplate, createExerciseSlot } from "../../actions/planActions";
 
@@ -25,7 +24,13 @@ const useStyles = makeStyles({
     },
 });
 
-const Template = ({ getTemplate, template, match, createExerciseSlot }) => {
+const Template = ({
+    getTemplate,
+    template,
+    match,
+    createExerciseSlot,
+    coach,
+}) => {
     const { id, exerciseId, templateId } = match.params;
 
     const classes = useStyles();
@@ -36,7 +41,7 @@ const Template = ({ getTemplate, template, match, createExerciseSlot }) => {
     console.log("render");
     useEffect(() => {
         getTemplate(id, exerciseId, templateId);
-    }, []);
+    }, [exerciseId, getTemplate, id, templateId]);
     return (
         <Paper style={{ height: "100%" }}>
             <Container>
@@ -47,7 +52,7 @@ const Template = ({ getTemplate, template, match, createExerciseSlot }) => {
                 )}
                 <hr />
                 <Typography variant="h5" className={classes.templates}>
-                    Exercise Slots
+                    Exercises
                 </Typography>
 
                 <hr />
@@ -62,7 +67,7 @@ const Template = ({ getTemplate, template, match, createExerciseSlot }) => {
                                     <ExerciseSlot
                                         clientId={id}
                                         slotId={slot.id}
-                                        exerciseId={exerciseId}
+                                        exercisePlanId={exerciseId}
                                         templateId={templateId}
                                         slot={slot}
                                     />
@@ -70,18 +75,20 @@ const Template = ({ getTemplate, template, match, createExerciseSlot }) => {
                             ))}
                     </Grid>
                 </Container>
-                <Button
-                    className={classes.button}
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                        createExerciseSlot(id, exerciseId, templateId);
-                        getTemplate(id, exerciseId, templateId);
-                        forceUpdate();
-                    }}
-                >
-                    Create An Exercise Slot
-                </Button>
+                {coach.coach && (
+                    <Button
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            createExerciseSlot(id, exerciseId, templateId);
+                            getTemplate(id, exerciseId, templateId);
+                            forceUpdate();
+                        }}
+                    >
+                        Create An Exercise
+                    </Button>
+                )}
             </Container>
         </Paper>
     );
@@ -95,6 +102,7 @@ Template.propTypes = {
 
 const mapStateToProps = (state) => ({
     template: state.plans.template,
+    coach: state.coach,
 });
 
 export default connect(mapStateToProps, { getTemplate, createExerciseSlot })(

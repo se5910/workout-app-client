@@ -3,7 +3,6 @@ import {
     Card,
     CardContent,
     CardActions,
-    CardActionArea,
     Button,
     Typography,
 } from "@material-ui/core";
@@ -57,6 +56,10 @@ const TemplateCard = ({ template, clientId, planId }) => {
     );
 };
 
-TemplateCard.propTypes = {};
+TemplateCard.propTypes = {
+    template: PropTypes.func.isRequired,
+    clientId: PropTypes.number.isRequired,
+    planId: PropTypes.number.isRequired,
+};
 
 export default TemplateCard;

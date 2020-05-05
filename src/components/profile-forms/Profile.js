@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 
 import store from "../../store";
 import { GET_ERRORS } from "../../actions/types";
-import { Paper, Menu } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import {
     createOrUpdateClientAndProfile,
     getCurrentProfile,

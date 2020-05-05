@@ -11,9 +11,7 @@ import Purchases from "./pages/Purchases";
 import ClientDetail from "./components/ClientDetail/ClientDetail";
 import Profile from "./components/profile-forms/Profile";
 import ExercisePlan from "./components/ExercisePlan";
-import MealPlan from "./components/MealPlan";
 import CreateExercisePlan from "./components/plans/CreateExercisePlan";
-import CreateMealPlan from "./components/plans/CreateMealPlan";
 import CreateTemplate from "./components/templates/CreateTemplate";
 import UpdateTemplate from "./components/templates/UpdateTemplate";
 import Template from "./components/templates/Template";
@@ -93,20 +91,11 @@ function App() {
                             path="/client/:id/exercise-plan/:planId"
                             component={ExercisePlan}
                         />
-                        <SecureRoute
-                            exact
-                            path="/client/:id/meal-plan/:planId"
-                            component={MealPlan}
-                        />
+
                         <SecureRoute
                             exact
                             path="/client/:id/create-exercise-plan"
                             component={CreateExercisePlan}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/client/:id/create-meal-plan"
-                            component={CreateMealPlan}
                         />
                         <SecureRoute
                             exact
