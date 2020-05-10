@@ -10,7 +10,7 @@ import setJWTToken from "../util/setJWTToken";
 
 export const createNewUser = (newUser, history) => async (dispatch) => {
     await axios
-        .post("/api/users/register", newUser)
+        .post(`/api/users/register`, newUser)
         .then((res) => {
             history.push("/login");
             dispatch({
@@ -37,7 +37,7 @@ export const clearErrors = () => (dispatch) => {
 export const login = (LoginRequest) => async (dispatch) => {
     // post => Login Request
     await axios
-        .post("/api/users/login", LoginRequest)
+        .post(`/api/users/login`, LoginRequest)
         .then((res) => {
             // Extract token from res.data
             const { token } = res.data;
@@ -65,7 +65,7 @@ export const login = (LoginRequest) => async (dispatch) => {
 
 export const verifyCoach = () => async (dispatch) => {
     try {
-        const res = await axios.get("api/coach");
+        const res = await axios.get(`/api/coach`);
         dispatch({
             type: VERIFY_COACH,
             payload: res.data,
