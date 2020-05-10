@@ -3,7 +3,7 @@ import { GET_PROFILE, PROFILE_ERROR, GET_ERRORS } from "./types";
 
 export const getCurrentProfile = () => async (dispatch) => {
     try {
-        const res = await axios.get("api/client/me");
+        const res = await axios.get(`/api/client/me`);
 
         dispatch({
             type: GET_PROFILE,
@@ -25,7 +25,7 @@ export const createOrUpdateClientAndProfile = (
     edit = false
 ) => async (dispatch) => {
     try {
-        const res = await axios.post("/api/client", formData);
+        const res = await axios.post(`/api/client`, formData);
 
         dispatch({
             type: GET_PROFILE,

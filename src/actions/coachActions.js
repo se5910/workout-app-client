@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getClients = () => async (dispatch) => {
     try {
-        const res = await axios.get("/api/coach/clients");
+        const res = await axios.get(`/api/coach/clients`);
         dispatch({
             type: GET_CLIENTS,
             payload: res.data,
@@ -37,7 +37,7 @@ export const getClient = (id) => async (dispatch) => {
 
 export const approveClient = (clientId) => async (dispatch) => {
     try {
-        await axios.post(`api/coach/approve/client/${clientId}`);
+        await axios.post(`/api/coach/approve/client/${clientId}`);
         dispatch(getClients());
     } catch (err) {
         if (err.response && err.response.data) {
