@@ -25,8 +25,8 @@ export const createExercisePlan = (clientId, formData, history) => async (
     dispatch
 ) => {
     try {
-        axios.post(`/api/client/${clientId}/exercisePlan`, formData);
-        history.goBack();
+        await axios.post(`/api/client/${clientId}/exercisePlan`, formData);
+        history.push(`/client/${clientId}`);
     } catch (err) {
         dispatch({
             GET_ERRORS,
@@ -159,7 +159,7 @@ export const getWeeks = (
     exerciseSlotId
 ) => async (dispatch) => {
     try {
-        axios.get(
+        await axios.get(
             `/api/client/${clientId}/exercisePlan/${planId}/template/${templateId}/exerciseSlot/${exerciseSlotId}/week`
         );
     } catch (err) {

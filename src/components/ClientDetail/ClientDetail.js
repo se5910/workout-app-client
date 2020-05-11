@@ -34,7 +34,7 @@ const ClientDetail = ({
     useEffect(() => {
         getClient(id);
         getClientExercisePlans(id);
-    }, [getClient, getClientExercisePlans, id]);
+    }, []);
 
     return (
         <Container>
