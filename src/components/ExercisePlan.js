@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TemplateCard from "./templates/TemplateCard";
+import { verifyCoach } from "../actions/authActions";
 
 const useStyles = makeStyles({
     content: {
@@ -28,6 +29,7 @@ const ExercisePlan = ({
     match,
     getExercisePlanById,
     plans: { exercisePlan },
+    verifyCoach,
     coach,
 }) => {
     const classes = useStyles();
@@ -38,6 +40,7 @@ const ExercisePlan = ({
 
     useEffect(() => {
         getExercisePlanById(id, planId);
+        verifyCoach();
     }, [id, planId, getExercisePlanById]);
 
     return (
@@ -98,4 +101,6 @@ const mapStateToProps = (state) => ({
     coach: state.coach,
 });
 
-export default connect(mapStateToProps, { getExercisePlanById })(ExercisePlan);
+export default connect(mapStateToProps, { getExercisePlanById, verifyCoach })(
+    ExercisePlan
+);
