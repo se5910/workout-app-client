@@ -9,7 +9,7 @@ import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { Paper } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { createTemplate } from "../../actions/planActions";
+import { createOrUpdateTemplate } from "../../actions/planActions";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Template = ({ history, createTemplate, match }) => {
+const Template = ({ history, createOrUpdateTemplate, match }) => {
     const classes = useStyles();
 
     const { id, exerciseId } = match.params;
@@ -51,7 +51,7 @@ const Template = ({ history, createTemplate, match }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        createTemplate(id, exerciseId, formData, history);
+        createOrUpdateTemplate(id, exerciseId, formData, history);
     };
 
     return (
@@ -112,7 +112,7 @@ const Template = ({ history, createTemplate, match }) => {
 };
 
 Template.propTypes = {
-    createTemplate: PropTypes.func.isRequired,
+    createOrUpdateTemplate: PropTypes.func.isRequired,
 };
 
-export default connect(null, { createTemplate })(Template);
+export default connect(null, { createOrUpdateTemplate })(Template);
