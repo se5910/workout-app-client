@@ -9,6 +9,7 @@ import ExerciseSlot from "../exerciseSlot/ExerciseSlot";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getTemplate, createExerciseSlot } from "../../actions/planActions";
+import { verifyCoach } from "../../actions/authActions";
 
 const useStyles = makeStyles({
     content: {
@@ -30,6 +31,7 @@ const Template = ({
     match,
     createExerciseSlot,
     coach,
+    verifyCoach,
 }) => {
     const { id, exerciseId, templateId } = match.params;
 
@@ -37,7 +39,15 @@ const Template = ({
 
     useEffect(() => {
         getTemplate(id, exerciseId, templateId);
-    }, []);
+
+        verifyCoach();
+    }, [getTemplate, verifyCoach, id, exerciseId, templateId]);
+
+    const onClick = () => {
+        console.log(id, exerciseId, templateId);
+        createExerciseSlot(id, exerciseId, templateId, {});
+    };
+
     return (
         <Paper style={{ height: "100%" }}>
             <Container>
@@ -52,19 +62,19 @@ const Template = ({
                 </Typography>
 
                 <hr />
-                {template && template.exerciseSlots.length < 0 && (
+                {template && template.exerciseSlots.length <= 0 && (
                     <p>There are no templates in this plan</p>
                 )}
                 <Container>
                     <Grid container spacing={3}>
                         {template &&
                             template.exerciseSlots.map((slot) => (
-                                <Grid item md={12}>
+                                <Grid item md={12} key={slot.id}>
                                     <ExerciseSlot
-                                        clientId={id}
-                                        slotId={slot.id}
-                                        exercisePlanId={exerciseId}
-                                        templateId={templateId}
+                                        clientId={parseInt(id)}
+                                        slotId={parseInt(slot.id)}
+                                        exercisePlanId={parseInt(exerciseId)}
+                                        templateId={parseInt(templateId)}
                                         slot={slot}
                                     />
                                 </Grid>
@@ -77,8 +87,7 @@ const Template = ({
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            createExerciseSlot(id, exerciseId, templateId);
-                            getTemplate(id, exerciseId, templateId);
+                            onClick();
                         }}
                     >
                         Create An Exercise
@@ -93,6 +102,7 @@ Template.propTypes = {
     template: PropTypes.object.isRequired,
     getTemplate: PropTypes.func.isRequired,
     createExerciseSlot: PropTypes.func.isRequired,
+    verifyCoach: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -100,6 +110,8 @@ const mapStateToProps = (state) => ({
     coach: state.coach,
 });
 
-export default connect(mapStateToProps, { getTemplate, createExerciseSlot })(
-    Template
-);
+export default connect(mapStateToProps, {
+    getTemplate,
+    verifyCoach,
+    createExerciseSlot,
+})(Template);
