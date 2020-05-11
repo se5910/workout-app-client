@@ -14,7 +14,7 @@ const initialState = {
     mealPlan: null,
     exercisePlans: null,
     exercisePlan: null,
-    template: null,
+    template: { exerciseSlots: [] },
     loading: true,
 };
 
@@ -59,6 +59,7 @@ export default function (state = initialState, action) {
         case CREATE_SLOT:
             return {
                 ...state,
+                template: { exerciseSlots: [...state, action.payload] },
             };
         default:
             return state;
