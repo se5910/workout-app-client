@@ -5,7 +5,7 @@ import { Paper, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { getTemplate, createTemplate } from "../../actions/planActions";
+import { getTemplate, createOrUpdateTemplate } from "../../actions/planActions";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -68,7 +68,7 @@ const Template = ({
 
     const onSubmit = (e) => {
         e.preventDefault();
-        createTemplate(id, exerciseId, formData, history);
+        createOrUpdateTemplate(id, exerciseId, formData, history);
     };
 
     return (
@@ -136,6 +136,7 @@ const mapStateToProps = (state) => ({
     template: state.plans,
 });
 
-export default connect(mapStateToProps, { getTemplate, createTemplate })(
-    Template
-);
+export default connect(mapStateToProps, {
+    getTemplate,
+    createOrUpdateTemplate,
+})(Template);
