@@ -247,12 +247,18 @@ const CreateProfile = ({
                                 error={errors.coach}
                                 helperText={errors.coach}
                             >
-                                <MenuItem value="Shae">Shayne</MenuItem>
+                                <MenuItem value="shayne@hype4fitness.com">
+                                    Shayne
+                                </MenuItem>
                                 <MenuItem value="josh@hype4fitness.com">
                                     Josh
                                 </MenuItem>
-                                <MenuItem value="Glynn">Glynn</MenuItem>
-                                <MenuItem value="John">John</MenuItem>
+                                <MenuItem value="glynn@hype4fitness.com">
+                                    Glynn
+                                </MenuItem>
+                                <MenuItem value="john@hype4fitness.com">
+                                    John
+                                </MenuItem>
                             </Select>
                         </Fragment>
                     )}
