@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
@@ -106,6 +106,11 @@ const CreateProfile = ({
             history,
             profile ? true : false
         );
+    };
+
+    const formatCoachName = (coach) => {
+        const name = coach.split("@")[0];
+        return name.charAt(0).toUpperCase() + name.slice(1);
     };
 
     return (
@@ -216,23 +221,41 @@ const CreateProfile = ({
                         error={errors.healthHistory}
                         helperText={errors.healthHistory}
                     />
-                    <InputLabel id="coach-label">Coach</InputLabel>
-                    <Select
-                        variant="outlined"
-                        fullWidth
-                        name="coach"
-                        label-id="coach"
-                        id="coach"
-                        value={coach}
-                        onChange={(e) => onChange(e)}
-                        error={errors.coach}
-                        helperText={errors.coach}
-                    >
-                        <MenuItem value="Shae">Shayne</MenuItem>
-                        <MenuItem value="josh@hype4fitness.com">Josh</MenuItem>
-                        <MenuItem value="Glynn">Glynn</MenuItem>
-                        <MenuItem value="John">John</MenuItem>
-                    </Select>
+
+                    {profile && profile.coach ? (
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            fullWidth
+                            disabled
+                            name="coach"
+                            label="Coach"
+                            id="coach"
+                            value={formatCoachName(coach)}
+                        />
+                    ) : (
+                        <Fragment>
+                            <InputLabel id="coach-label">Coach</InputLabel>
+                            <Select
+                                variant="outlined"
+                                fullWidth
+                                name="coach"
+                                label-id="coach"
+                                id="coach"
+                                value={coach}
+                                onChange={(e) => onChange(e)}
+                                error={errors.coach}
+                                helperText={errors.coach}
+                            >
+                                <MenuItem value="Shae">Shayne</MenuItem>
+                                <MenuItem value="josh@hype4fitness.com">
+                                    Josh
+                                </MenuItem>
+                                <MenuItem value="Glynn">Glynn</MenuItem>
+                                <MenuItem value="John">John</MenuItem>
+                            </Select>
+                        </Fragment>
+                    )}
                     <Button
                         type="submit"
                         fullWidth
