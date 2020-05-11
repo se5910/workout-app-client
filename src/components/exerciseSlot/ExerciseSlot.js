@@ -127,7 +127,7 @@ const ExerciseSlot = ({
                             </FormControl>
                         )}
                     </Grid>
-                    <Grid item xs={6} spacing={3}>
+                    <Grid item xs={6}>
                         <Grid container>
                             {slot &&
                                 slot.weeks.map((week) => {
