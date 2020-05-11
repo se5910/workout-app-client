@@ -70,9 +70,12 @@ export const getExercisePlanById = (clientId, planId) => async (dispatch) => {
     }
 };
 
-export const createTemplate = (clientId, planId, formData, history) => async (
-    dispatch
-) => {
+export const createOrUpdateTemplate = (
+    clientId,
+    planId,
+    formData,
+    history
+) => async (dispatch) => {
     try {
         await axios.post(
             `/api/client/${clientId}/exercisePlan/${planId}/template`,
@@ -125,9 +128,7 @@ export const createExerciseSlot = (
             type: CREATE_SLOT,
             payload: res.data,
         });
-        dispatch({
-            GET_TEMPLATE,
-        });
+        console.log(res.data);
     } catch (error) {}
 };
 
