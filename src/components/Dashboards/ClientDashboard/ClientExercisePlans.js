@@ -27,7 +27,7 @@ const ClientExercisePlans = ({
     const classes = useStyles();
     useEffect(() => {
         getClientExercisePlans(profile.id);
-    }, [profile.id]);
+    }, []);
     return (
         <Paper className={classes.content}>
             <Typography variant="h5" className={classes.margin}>

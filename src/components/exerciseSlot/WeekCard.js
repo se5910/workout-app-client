@@ -6,11 +6,14 @@ import CardContent from "@material-ui/core/CardContent";
 
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
+import { createSet } from "../../actions/planActions";
+import { connect } from "react-redux";
 
-const WeekCard = ({ week }) => {
-    const [formData, setFormData] = useState({
-        setNumber: "",
-    });
+const WeekCard = ({ week, clientId, exercisePlanId, templateId, slotId }) => {
+    const onSubmit = (e) => {
+        e.preventDefault();
+        createSet(clientId, exercisePlanId, templateId, slotId, {});
+    };
 
     return (
         <Card>
@@ -18,7 +21,12 @@ const WeekCard = ({ week }) => {
                 Week: {week.week}
             </Typography>
             <CardContent>
-                <form style={{ disply: "table" }}>
+                <form
+                    style={{ disply: "table" }}
+                    onSubmit={(e) => {
+                        onSubmit(e);
+                    }}
+                >
                     <div style={{ display: "table-row" }}>
                         <TextField
                             size="small"
@@ -91,4 +99,4 @@ WeekCard.propTypes = {
     week: PropTypes.object.isRequired,
 };
 
-export default WeekCard;
+export default connect(null, { createSet })(WeekCard);
