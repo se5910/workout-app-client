@@ -140,7 +140,7 @@ const SignUp = ({ errors, createNewUser, history, auth }) => {
                         id="confirmPassword"
                         value={confirmPassword}
                         error={confirmError ? true : false}
-                        helperText="Passwords do not match"
+                        helperText={confirmError && "Passwords do not match"}
                         onChange={(e) => onChange(e)}
                     />
                     <Button

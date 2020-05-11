@@ -3,22 +3,10 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import SignUp from "./pages/SignUp";
-import Purchases from "./pages/Purchases";
-import ClientDetail from "./components/ClientDetail/ClientDetail";
-import Profile from "./components/profile-forms/Profile";
-import ExercisePlan from "./components/ExercisePlan";
-import CreateExercisePlan from "./components/plans/CreateExercisePlan";
-import CreateTemplate from "./components/templates/CreateTemplate";
-import UpdateTemplate from "./components/templates/UpdateTemplate";
-import Template from "./components/templates/Template";
-import NotFound from "./pages/NotFound";
+import Routes from "./components/routing/Routes";
 
 import store from "./store";
-import SecureRoute from "./util/SecureRoute";
+import Home from "./pages/Home";
 import setJWTToken from "./util/setJWTToken";
 
 import { Provider } from "react-redux";
@@ -50,70 +38,8 @@ function App() {
             <Router>
                 <Layout>
                     <Switch>
-                        {
-                            // Public
-                        }
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/signup" component={SignUp} />
-                        <Route exact path="/login" component={Login} />
-
-                        {
-                            // Protected
-                        }
-
-                        <SecureRoute
-                            exact
-                            path="/dashboard"
-                            component={Dashboard}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/purchases"
-                            component={Purchases}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/create-profile"
-                            component={Profile}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/update-profile"
-                            component={Profile}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/client/:id"
-                            component={ClientDetail}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/client/:id/exercise-plan/:planId"
-                            component={ExercisePlan}
-                        />
-
-                        <SecureRoute
-                            exact
-                            path="/client/:id/create-exercise-plan"
-                            component={CreateExercisePlan}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/client/:id/exercise-plan/:exerciseId/create-template"
-                            component={CreateTemplate}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/client/:id/exercise-plan/:exerciseId/template/:templateId/update"
-                            component={UpdateTemplate}
-                        />
-                        <SecureRoute
-                            exact
-                            path="/client/:id/exercise-plan/:exerciseId/template/:templateId"
-                            component={Template}
-                        />
-
-                        <Route component={NotFound} />
+                        <Route component={Routes} />
                     </Switch>
                 </Layout>
             </Router>
